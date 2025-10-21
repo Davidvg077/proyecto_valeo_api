@@ -15,3 +15,10 @@ def create_producto(data: ProductoCreate, session: Session = Depends(get_session
     session.refresh(producto)
     return producto
 
+# Listamos productos
+@router.get("/", response_model=list[Producto])
+def list_productos(session: Session = Depends(get_session)):
+    productos = session.exec(select(Producto)).all()
+    return productos
+
+
