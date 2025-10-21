@@ -17,3 +17,11 @@ def create_cliente(data: ClienteCreate, session: Session = Depends(get_session))
 @router.get("/", response_model=list[Cliente])
 def list_clientes(session: Session = Depends(get_session)):
     return session.exec(select(Cliente)).all()
+
+@router.get("/{cliente_id}", response_model=Cliente)
+def get_cliente(cliente_id: int, session: Session = Depends(get_session)):
+    cli = session.get(Cliente, cliente_id)
+    if not cli:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    return cli
+
