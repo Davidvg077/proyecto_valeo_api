@@ -13,3 +13,7 @@ def create_cliente(data: ClienteCreate, session: Session = Depends(get_session))
     session.commit()
     session.refresh(cli)
     return cli
+
+@router.get("/", response_model=list[Cliente])
+def list_clientes(session: Session = Depends(get_session)):
+    return session.exec(select(Cliente)).all()
