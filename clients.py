@@ -41,3 +41,12 @@ def update_cliente(cliente_id: int, data: ClienteUpdate, session: Session = Depe
     session.refresh(cli)
     return cli  
 
+# Eliminar cliente
+@router.delete("/{cliente_id}", status_code=204)
+def delete_cliente(cliente_id: int, session: Session = Depends(get_session)):
+    cli = session.get(Cliente, cliente_id)
+    if not cli:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    session.delete(cli)
+    session.commit()    
+
