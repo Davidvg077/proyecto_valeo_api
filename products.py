@@ -21,4 +21,10 @@ def list_productos(session: Session = Depends(get_session)):
     productos = session.exec(select(Producto)).all()
     return productos
 
-
+# Obtener producto por ID
+@router.get("/{producto_id}", response_model=Producto)
+def get_producto(producto_id: int, session: Session = Depends(get_session)):
+    producto = session.get(Producto, producto_id)
+    if not producto:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return producto
