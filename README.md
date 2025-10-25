@@ -1,73 +1,84 @@
 # 🚀 Proyecto Valeo — API de Gestión de Ventas e Inventario
 
-API desarrollada con **FastAPI + SQLModel + SQLite**, enfocada en la gestión de clientes, productos y pedidos de la empresa **Industrias Valeo S.A.S**.  
-Permite realizar operaciones CRUD completas, manejar relaciones entre entidades y generar reportes automáticos.
+API desarrollada con **FastAPI + SQLModel + SQLite**, enfocada en la gestión de **clientes**, **productos** y **pedidos** para la empresa **Industrias Valeo S.A.S**.  
+El sistema permite realizar operaciones CRUD completas, controlar inventario automáticamente y manejar las relaciones entre entidades del modelo de datos.
 
 ---
 
-## 🧠 Objetivo del proyecto
+## 🧠 Objetivo del Proyecto
 
-Desarrollar una aplicación backend que permita administrar la información de clientes, productos, pedidos y facturación de manera eficiente, aplicando las reglas de negocio y relaciones entre entidades del modelo de datos.  
-El proyecto busca servir como sistema base de gestión y punto de integración futura con módulos de reportes y análisis.
+Desarrollar una aplicación backend que permita administrar la información de clientes, productos y pedidos de manera eficiente, aplicando las reglas de negocio y las relaciones entre entidades.  
+El proyecto busca servir como base para futuras integraciones con módulos de facturación y reportes analíticos.
 
 ---
 
 ## 🗺️ Mapa de Endpoints (API Valeo)
 
-| Método | Endpoint | Descripción | Relación / Regla de negocio |
-|--------|-----------|--------------|------------------------------|
+| Método | Endpoint | Descripción | Regla / Relación |
+|--------|-----------|--------------|------------------|
 | **GET** | `/` | Estado del API | Devuelve mensaje de conexión |
-| **POST** | `/clientes` | Crear cliente | Registra un nuevo cliente con datos coherentes |
-| **GET** | `/clientes` | Listar clientes | Retorna todos los clientes activos |
-| **GET** | `/clientes/{id}` | Obtener cliente | Muestra datos de un cliente por ID |
-| **PUT** | `/clientes/{id}` | Actualizar cliente | Modifica información completa |
-| **PATCH** | `/clientes/{id}` | Actualización parcial | Cambia solo correo o teléfono |
-| **DELETE** | `/clientes/{id}` | Eliminar cliente | *Soft delete*, marca como inactivo |
-| **POST** | `/clientes/{id}/restore` | Restaurar cliente | Reactiva cliente eliminado |
-| **POST** | `/products` | Crear producto | Registra un producto con stock y precio |
-| **GET** | `/products` | Listar productos | Muestra productos activos |
+| **POST** | `/clientes/` | Crear cliente | Registra un nuevo cliente |
+| **GET** | `/clientes/` | Listar clientes | Muestra todos los clientes |
+| **GET** | `/clientes/{id}` | Obtener cliente | Busca cliente por ID |
+| **PUT** | `/clientes/{id}` | Actualizar cliente | Modifica información |
+| **DELETE** | `/clientes/{id}` | Eliminar cliente | Elimina cliente de la BD |
+| **POST** | `/products/` | Crear producto | Registra un producto con precio y stock |
+| **GET** | `/products/` | Listar productos | Muestra todos los productos |
 | **GET** | `/products/{id}` | Obtener producto | Muestra detalles de un producto |
-| **PUT** | `/products/{id}` | Actualizar producto | Actualiza todos los campos |
-| **PATCH** | `/products/{id}` | Actualizar stock/precio | Solo campos específicos |
-| **DELETE** | `/products/{id}` | Eliminar producto | *Soft delete*, no elimina físicamente |
-| **POST** | `/pedidos` | Crear pedido | Valida stock, calcula total y crea los detalles |
-| **GET** | `/pedidos` | Listar pedidos | Muestra pedidos con sus productos |
-| **POST** | `/facturas/{id_pedido}` | Crear factura | Crea factura asociada (relación 1:1) |
-| **GET** | `/facturas/{id_pedido}` | Consultar factura | Devuelve la factura por pedido |
-| **GET** | `/reports/ventas-producto` | Reporte CSV | Ventas por producto (rango de fechas) |
+| **PUT** | `/products/{id}` | Actualizar producto | Actualiza campos del producto |
+| **DELETE** | `/products/{id}` | Eliminar producto | Elimina producto de la BD |
+| **POST** | `/pedidos/` | Crear pedido | Valida stock, calcula total y crea detalles |
+| **GET** | `/pedidos/` | Listar pedidos | Muestra pedidos con sus productos |
+| **GET** | `/pedidos/{id}` | Consultar pedido | Devuelve un pedido específico |
+| **PUT** | `/pedidos/{id}` | Actualizar pedido | Permite cambiar cliente o productos |
+| **DELETE** | `/pedidos/{id}` | Eliminar pedido | Elimina pedido y repone stock |
 
 ---
 
-## 🧩 Relaciones entre los modelos
-
-| Relación | Descripción |
-|-----------|-------------|
-| **1:N** | Cliente → Pedido |
-| **N:M** | Pedido ↔ Producto (a través de DetallePedido) |
-| **1:1** | Pedido ↔ Factura |
-
----
-
-## 🗂️ Modelos principales
+## 🧱 Modelos Principales
 
 | Modelo | Descripción |
 |---------|--------------|
-| **Cliente** | Información de los clientes (nombre, correo, teléfono). |
-| **Producto** | Datos de los productos (nombre, precio, stock). |
-| **Pedido** | Encabezado del pedido con total, fecha y cliente asociado. |
-| **DetallePedido** | Productos incluidos en cada pedido (cantidad, precio, subtotal). |
-| **Factura** | Documento asociado 1:1 con un pedido, incluye medio de pago y número de factura. |
+| **Cliente** | Contiene datos de los clientes (`id`, `nombre`, `correo`, `telefono`). |
+| **Producto** | Catálogo de productos (`id`, `nombre`, `precio`, `stock`). |
+| **Pedido** | Encabezado del pedido (`id`, `id_cliente`, `fecha`, `total`). |
+| **DetallePedido** | Detalle de productos en cada pedido (`id_pedido`, `id_producto`, `cantidad`, `subtotal`). |
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## 🔗 Relaciones entre Entidades
+
+| Relación | Descripción |
+|-----------|-------------|
+| **1 : N** | Un **cliente** puede tener **muchos pedidos** |
+| **N : M** | Un **pedido** puede tener **muchos productos**, y un **producto** puede estar en **muchos pedidos** (relación manejada por **DetallePedido**) |
+
+---
+
+
+---
+
+## ⚙️ Tecnologías Utilizadas
 
 - 🐍 **Python 3.11**
-- ⚡ **FastAPI**
-- 🗃️ **SQLModel + SQLite**
-- 🧩 **Uvicorn**
-- 📊 **Pandas / ReportLab / OpenPyXL** (para reportes)
+- ⚡ **FastAPI** — Framework backend moderno y rápido
+- 🗃️ **SQLModel + SQLite** — ORM y base de datos local
+- 🧩 **Uvicorn** — Servidor ASGI para ejecutar la API
+- ✅ **Pydantic** — Validación y serialización de datos
 
 ---
 
-## 🧪 Ejecución del proyecto
+## 🧮 Base de Datos
+
+- Motor: **SQLite 3**
+- Archivo local: `valeodb.sqlite3`
+- ORM: **SQLModel**
+- Las tablas se crean automáticamente mediante:
+  ```python
+  init_db()
+
+##  👨‍💻 Autor
+
+Omar David Valderrama Gutiérrez
+📍 Universidad Católica de Colombia
+📧 odvalderrama16@ucatolica.edu.co
