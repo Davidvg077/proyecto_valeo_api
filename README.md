@@ -46,14 +46,53 @@ El proyecto busca servir como base para futuras integraciones con módulos de fa
 
 ---
 
-## 🔗 Relaciones entre Entidades
+### Relaciones directas (por clave foránea)
+| # | Tipo | Entidad A | Entidad B | Implementación |
+|---|------|-----------|-----------|----------------|
+| 1 | **1 : N** | **Cliente** | **Pedido** | `Pedido.id_cliente → Cliente.id` |
+| 2 | **1 : N** | **Pedido** | **DetallePedido** | `DetallePedido.id_pedido → Pedido.id` |
+| 3 | **1 : N** | **Producto** | **DetallePedido** | `DetallePedido.id_producto → Producto.id` |
 
-| Relación | Descripción |
-|-----------|-------------|
-| **1 : N** | Un **cliente** puede tener **muchos pedidos** |
-| **N : M** | Un **pedido** puede tener **muchos productos**, y un **producto** puede estar en **muchos pedidos** (relación manejada por **DetallePedido**) |
+### Relación derivada (muchos a muchos)
+| # | Tipo | Entidad A | Entidad B | Implementación |
+|---|------|-----------|-----------|----------------|
+| 4 | **N : M** | **Pedido** | **Producto** | **A través de** `DetallePedido` (combina #2 y #3) |
 
 ---
+
+## Diagrama ENTIDAD RELACION 
+
+
+
+    CLIENTE {
+      int id PK
+      string nombre
+      string correo
+      string telefono
+    }
+
+    PEDIDO {
+      int id PK
+      int id_cliente FK
+      datetime fecha
+      float total
+    }
+
+    DETALLE_PEDIDO {
+      int id PK
+      int id_pedido FK
+      int id_producto FK
+      int cantidad
+      float precio_unitario
+      float subtotal
+    }
+
+    PRODUCTO {
+      int id PK
+      string nombre
+      float precio
+      int stock
+    }
 
 
 ---
