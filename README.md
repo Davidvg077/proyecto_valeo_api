@@ -1,123 +1,141 @@
-# 🚀 Proyecto Valeo — API de Gestión de Ventas e Inventario
+# API Tienda con SQLModel
 
-API desarrollada con **FastAPI + SQLModel + SQLite**, enfocada en la gestión de **clientes**, **productos** y **pedidos** para la empresa **Industrias Valeo S.A.S**.  
-El sistema permite realizar operaciones CRUD completas, controlar inventario automáticamente y manejar las relaciones entre entidades del modelo de datos.
+## Descripción
+Este proyecto es una API Tienda en línea, desarrollada con FastAPI y SQLModel. Permite gestionar categorías y productos, incluyendo operaciones CRUD (Crear, Leer, Actualizar, Eliminar). La base de datos utilizada es SQLite para simplicidad y facilidad de uso.
 
----
+La API incluye funcionalidades como:
+- Gestión de categorías (crear, listar, obtener, actualizar, desactivar, eliminar).
+- Gestión de productos (crear, listar, obtener, actualizar, desactivar, eliminar, restar stock).
+- Relaciones entre categorías y productos.
+- Validaciones con Pydantic para asegurar la integridad de los datos.
 
-## 🧠 Objetivo del Proyecto
+## Tecnologías Utilizadas
+- **FastAPI**: Framework para construir APIs web rápidas y modernas.
+- **SQLModel**: Librería para trabajar con SQLAlchemy y Pydantic, facilitando el manejo de modelos de base de datos.
+- **SQLite**: Base de datos ligera y embebida.
+- **Pydantic**: Para validación de datos y esquemas.
 
-Desarrollar una aplicación backend que permita administrar la información de clientes, productos y pedidos de manera eficiente, aplicando las reglas de negocio y las relaciones entre entidades.  
-El proyecto busca servir como base para futuras integraciones con módulos de facturación y reportes analíticos.
+## Instalación
+1. Clona el repositorio:
+   ```
+   git clone <url-del-repositorio>
+   cd tiendaoficial
+   ```
 
----
+2. Instala las dependencias:
+   ```
+   pip install fastapi sqlmodel uvicorn
+   ```
 
-## 🗺️ Mapa de Endpoints (API Valeo)
+3. Ejecuta la aplicación:
+   ```
+   uvicorn main:app --reload
+   ```
 
-| Método | Endpoint | Descripción | Regla / Relación |
-|--------|-----------|--------------|------------------|
-| **GET** | `/` | Estado del API | Devuelve mensaje de conexión |
-| **POST** | `/clientes/` | Crear cliente | Registra un nuevo cliente |
-| **GET** | `/clientes/` | Listar clientes | Muestra todos los clientes |
-| **GET** | `/clientes/{id}` | Obtener cliente | Busca cliente por ID |
-| **PUT** | `/clientes/{id}` | Actualizar cliente | Modifica información |
-| **DELETE** | `/clientes/{id}` | Eliminar cliente | Elimina cliente de la BD |
-| **POST** | `/products/` | Crear producto | Registra un producto con precio y stock |
-| **GET** | `/products/` | Listar productos | Muestra todos los productos |
-| **GET** | `/products/{id}` | Obtener producto | Muestra detalles de un producto |
-| **PUT** | `/products/{id}` | Actualizar producto | Actualiza campos del producto |
-| **DELETE** | `/products/{id}` | Eliminar producto | Elimina producto de la BD |
-| **POST** | `/pedidos/` | Crear pedido | Valida stock, calcula total y crea detalles |
-| **GET** | `/pedidos/` | Listar pedidos | Muestra pedidos con sus productos |
-| **GET** | `/pedidos/{id}` | Consultar pedido | Devuelve un pedido específico |
-| **PUT** | `/pedidos/{id}` | Actualizar pedido | Permite cambiar cliente o productos |
-| **DELETE** | `/pedidos/{id}` | Eliminar pedido | Elimina pedido y repone stock |
+La API estará disponible en `http://127.0.0.1:8000`.
 
----
+## Uso
+Una vez ejecutada, puedes acceder a la documentación interactiva de la API en `http://127.0.0.1:8000/docs` (Swagger UI) o `http://127.0.0.1:8000/redoc` (ReDoc).
 
-## 🧱 Modelos Principales
+### Endpoints Principales
+#### Categorías
+- `POST /categorias/`: Crear una nueva categoría.
+- `GET /categorias/`: Obtener todas las categorías activas.
+- `GET /categorias/{id}`: Obtener una categoría por ID.
+- `GET /categorias/{id}/productos`: Obtener una categoría con sus productos.
+- `PUT /categorias/{id}`: Actualizar una categoría.
+- `PATCH /categorias/{id}/desactivar`: Desactivar una categoría.
+- `DELETE /categorias/{id}`: Eliminar una categoría.
 
-| Modelo | Descripción |
-|---------|--------------|
-| **Cliente** | Contiene datos de los clientes (`id`, `nombre`, `correo`, `telefono`). |
-| **Producto** | Catálogo de productos (`id`, `nombre`, `precio`, `stock`). |
-| **Pedido** | Encabezado del pedido (`id`, `id_cliente`, `fecha`, `total`). |
-| **DetallePedido** | Detalle de productos en cada pedido (`id_pedido`, `id_producto`, `cantidad`, `subtotal`). |
+#### Productos
+- `POST /productos/`: Crear un nuevo producto.
+- `GET /productos/`: Obtener todos los productos.
+- `GET /productos/{id}`: Obtener un producto por ID.
+- `GET /productos/{id}/categoria`: Obtener un producto con su categoría.
+- `PUT /productos/{id}`: Actualizar un producto.
+- `PATCH /productos/{id}/desactivar`: Desactivar un producto.
+- `PATCH /productos/{id}/restar-stock`: Restar stock a un producto.
+- `DELETE /productos/{id}`: Eliminar un producto.
 
----
+## Estructura del Proyecto
+- `models.py`: Definición de los modelos de base de datos (Categoria, Producto).
+- `schemas.py`: Esquemas Pydantic para validación y respuestas.
+- `database.py`: Configuración de la base de datos y inicialización.
+- `crud.py`: Funciones CRUD para operaciones en la base de datos.
+- `main.py`: Punto de entrada de la aplicación FastAPI.
 
-### Relaciones directas (por clave foránea)
-| # | Tipo | Entidad A | Entidad B | Implementación |
-|---|------|-----------|-----------|----------------|
-| 1 | **1 : N** | **Cliente** | **Pedido** | `Pedido.id_cliente → Cliente.id` |
-| 2 | **1 : N** | **Pedido** | **DetallePedido** | `DetallePedido.id_pedido → Pedido.id` |
-| 3 | **1 : N** | **Producto** | **DetallePedido** | `DetallePedido.id_producto → Producto.id` |
+## Modelos y Relaciones
 
-### Relación derivada (muchos a muchos)
-| # | Tipo | Entidad A | Entidad B | Implementación |
-|---|------|-----------|-----------|----------------|
-| 4 | **N : M** | **Pedido** | **Producto** | **A través de** `DetallePedido` (combina #2 y #3) |
+### Clases de Modelos
+- **Categoria**:
+  - `id`: int (primary key)
+  - `nombre`: str (unique, index)
+  - `descripcion`: Optional[str]
+  - `activa`: bool (default: True)
+  - `deleted_at`: Optional[datetime]
+  - Relación: `productos` (List[Producto]) - back_populates="categoria"
 
----
+- **Producto**:
+  - `id`: int (primary key)
+  - `nombre`: str
+  - `descripcion`: Optional[str]
+  - `precio`: float
+  - `stock`: int
+  - `activo`: bool (default: True)
+  - `deleted_at`: Optional[datetime]
+  - `categoria_id`: int (foreign key to Categoria.id)
+  - Relación: `categoria` (Optional[Categoria]) - back_populates="productos"
 
-## Diagrama ENTIDAD RELACION 
+### Relaciones
+- Una **Categoria** puede tener muchos **Producto** (one-to-many).
+- Un **Producto** pertenece a una **Categoria** (many-to-one).
 
+## Endpoints Detallados
 
+### Categorías
+- `POST /categorias/`: Crear una nueva categoría.
+  - Body: `CategoriaCreate` (nombre, descripcion, activa)
+  - Response: `Categoria`
+- `GET /categorias/`: Obtener todas las categorías activas.
+  - Response: `list[Categoria]`
+- `GET /categorias/{id}`: Obtener una categoría por ID.
+  - Response: `Categoria`
+- `GET /categorias/{id}/productos`: Obtener una categoría con sus productos.
+  - Response: dict con categoría y lista de productos
+- `PUT /categorias/{id}`: Actualizar una categoría.
+  - Body: `CategoriaUpdate`
+  - Response: `Categoria`
+- `PATCH /categorias/{id}/desactivar`: Desactivar una categoría.
+  - Response: `Categoria`
+- `DELETE /categorias/{id}`: Eliminar una categoría (soft delete).
+  - Response: dict con mensaje
+- `GET /categorias/eliminadas`: Obtener categorías eliminadas.
+  - Response: list[dict]
 
-    CLIENTE {
-      int id PK
-      string nombre
-      string correo
-      string telefono
-    }
+### Productos
+- `POST /productos/`: Crear un nuevo producto.
+  - Body: `ProductoCreate` (nombre, descripcion, precio, stock, activo, categoria_id)
+  - Response: `Producto`
+- `GET /productos/`: Obtener todos los productos.
+  - Response: `list[ProductoListResponse]`
+- `GET /productos/{id}`: Obtener un producto por ID.
+  - Response: `Producto`
+- `GET /productos/{id}/categoria`: Obtener un producto con su categoría.
+  - Response: `ProductoResponse`
+- `PUT /productos/{id}`: Actualizar un producto.
+  - Body: `ProductoUpdate`
+  - Response: `Producto`
+- `PATCH /productos/{id}/desactivar`: Desactivar un producto.
+  - Response: `Producto`
+- `PATCH /productos/{id}/restar-stock`: Restar stock a un producto.
+  - Body: `RestarStock` (cantidad)
+  - Response: `Producto`
+- `DELETE /productos/{id}`: Eliminar un producto (soft delete).
+  - Response: dict con mensaje
+- `GET /productos/eliminados`: Obtener productos eliminados.
+  - Response: list[dict]
 
-    PEDIDO {
-      int id PK
-      int id_cliente FK
-      datetime fecha
-      float total
-    }
+## Autor
+- **Nombre**: Omar David Valderrama Gutierrez
+- **Código**: 67000516
 
-    DETALLE_PEDIDO {
-      int id PK
-      int id_pedido FK
-      int id_producto FK
-      int cantidad
-      float precio_unitario
-      float subtotal
-    }
-
-    PRODUCTO {
-      int id PK
-      string nombre
-      float precio
-      int stock
-    }
-
-
----
-
-## ⚙️ Tecnologías Utilizadas
-
-- 🐍 **Python 3.11**
-- ⚡ **FastAPI** — Framework backend moderno y rápido
-- 🗃️ **SQLModel + SQLite** — ORM y base de datos local
-- 🧩 **Uvicorn** — Servidor ASGI para ejecutar la API
-- ✅ **Pydantic** — Validación y serialización de datos
-
----
-
-## 🧮 Base de Datos
-
-- Motor: **SQLite 3**
-- Archivo local: `valeodb.sqlite3`
-- ORM: **SQLModel**
-- Las tablas se crean automáticamente mediante:
-  ```python
-  init_db()
-
-##  👨‍💻 Autor
-
-Omar David Valderrama Gutiérrez
-📍 Universidad Católica de Colombia
-📧 odvalderrama16@ucatolica.edu.co

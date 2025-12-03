@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Actualizar Producto</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+        /* Estilos específicos para la sección de búsqueda/actualización */
+        .search-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .update-form-container {
+            margin-top: 20px;
+            display: none; /* Oculto inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">Inicio</a>
+        <div class="dropdown">
+            <button class="dropbtn">Categorías</button>
+            <div class="dropdown-content">
+                <a href="/categorias/create">Crear Categoría</a>
+                <a href="/categorias/read">Ver Categorías</a>
+                <a href="/categorias/update">Actualizar Categoría</a>
+                <a href="/categorias/delete">Eliminar Categoría</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Productos</button>
+            <div class="dropdown-content">
+                <a href="/productos/create">Crear Producto</a>
+                <a href="/productos/read">Ver Productos</a>
+                <a href="/productos/update">Actualizar Producto</a>
+                <a href="/productos/delete">Eliminar Producto</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Clientes</button>
+            <div class="dropdown-content">
+                <a href="/clientes/create">Crear Cliente</a>
+                <a href="/clientes/read">Ver Clientes</a>
+                <a href="/clientes/update">Actualizar Cliente</a>
+                <a href="/clientes/delete">Eliminar Cliente</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="/ventas/create">Crear Venta</a>
+                <a href="/ventas/read">Ver Ventas</a>
+            </div>
+        </div>
+        <a href="/charts">📊 Dashboard</a>
+        <a href="/historial">Historial</a>
+        <a href="/developer-info">Información del Desarrollador</a>
+        <a href="/planning">Planificación</a>
+        <a href="/design">Diseño</a>
+        <a href="/informacion-del-proyecto">Información del Proyecto</a>
+    </nav>
+    <div class="container">
+        <h1>Actualizar Producto</h1>
+
+        <div class="search-section">
+            <h2>Seleccionar Producto</h2>
+            <form id="searchForm">
+                <label for="search_id">ID del Producto:</label>
+                <input type="number" id="search_id" name="id" required value="{{ producto.id if producto else '' }}" />
+                <button type="submit" id="btnBuscar">Buscar</button>
+            </form>
+            <div id="searchMessage" style="margin-top: 10px;">
+                {# Lógica MODIFICADA: Si hay error_message (ID no encontrado), mostrarlo #}
+                {% if error_message %}
+                    <p style="color: red;">❌ {{ error_message }}</p>
+                {# Si no hay error y se encontró el producto, mostrar confirmación #}
+                {% elif producto and producto.id %}
+                    <p style="color: green;">✅ Producto {{ producto.id }} cargado. Modifique los campos y haga clic en Actualizar.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="update-form-container" id="updateContainer">
+            <form id="updateForm" enctype="multipart/form-data">
+                <input type="hidden" id="id" name="id" value="{{ producto.id if producto else '' }}" />
+
+                <label for="nombre">Nombre del Producto:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ producto.nombre if producto else '' }}" />
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" value="{{ producto.descripcion if producto else '' }}" />
+
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" step="0.01" value="{{ producto.precio if producto else '' }}" />
+
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" value="{{ producto.stock if producto else '' }}" />
+
+                <label for="categoria_id">ID de Categoría:</label>
+                <input type="number" id="categoria_id" name="categoria_id" value="{{ producto.categoria_id if producto else '' }}" />
+
+                <label>Estado:</label>
+                <input type="radio" id="activo_true" name="activo" value="True" {% if producto and producto.activo == True %}checked{% endif %} />
+                <label for="activo_true">Activo</label>
+                <input type="radio" id="activo_false" name="activo" value="False" {% if producto and producto.activo == False %}checked{% endif %} />
+                <label for="activo_false">Inactivo</label>
+                <br>
+
+                <label for="imagen">Imagen (dejar vacío para mantener):</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*" />
+                <p id="currentImage">
+                    {% if producto and producto.media_url %}
+                        Imagen actual: <a href="{{ producto.media_url }}" target="_blank">Ver</a>
+                    {% endif %}
+                </p>
+
+                <button type="submit">Actualizar Producto</button>
+            </form>
+        </div>
+        
+        <div id="updateMessage" style="margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        const searchForm = document.getElementById('searchForm');
+        const updateContainer = document.getElementById('updateContainer');
+        const updateForm = document.getElementById('updateForm');
+        const updateMessage = document.getElementById('updateMessage');
+
+        // Mostrar formulario de actualización si hay datos precargados
+        if (document.getElementById('id').value) {
+            updateContainer.style.display = 'block';
+        }
+
+        // 1. Manejar la búsqueda (Redirigir con query parameter)
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('search_id').value;
+            if (id) {
+                // Esto hará que FastAPI cargue los datos al recargar la página
+                window.location.href = `/productos/update?id=${id}`;
+            }
+        });
+
+        // 2. Manejar la actualización (Envío PUT a la API)
+        updateForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const id = document.getElementById('id').value;
+            const formData = new FormData(this);
+
+            // Manejo de la imagen: si no hay archivo, se elimina el campo del FormData, 
+            // si está vacío, se envía un string vacío para que el backend lo interprete como "borrar URL".
+            const imagenFile = document.getElementById('imagen').files[0];
+            if (!imagenFile) {
+                formData.delete('imagen');
+            } else if (imagenFile.size === 0) {
+                formData.set('imagen', '');
+            }
+
+            try {
+                const response = await fetch(`/productos/${id}`, {
+                    method: 'PUT',
+                    body: formData // FastAPI manejará el FormData y los Forms/Files
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    updateMessage.innerHTML = '<p style="color: green;">✅ Producto actualizado exitosamente. ID: ' + result.id + '</p>';
+                    // Recargar los datos actualizados en el formulario
+                    setTimeout(() => {
+                        window.location.href = `/productos/update?id=${id}`;
+                    }, 1500);
+                    
+                } else {
+                    const error = await response.json();
+                    updateMessage.innerHTML = `<p style="color: red;">❌ Error al actualizar: ${error.detail}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                updateMessage.innerHTML = '<p style="color: red;">❌ Error de conexión al servidor.</p>';
+            }
+        });
+        
+        // Mostrar el contenedor de actualización si ya hay un ID cargado en la URL al iniciar
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('id')) {
+            updateContainer.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
