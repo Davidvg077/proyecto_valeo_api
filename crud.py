@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 from typing import Optional, List
-from sqlalchemy import and_, or_ 
+from sqlalchemy import and_, or_, text
 
 # =======================================================================
 # 📦 Funciones CRUD para Categoria
@@ -62,11 +62,40 @@ async def eliminar_categoria(id: int):
                 if producto.deleted_at is None:
                     producto.activo = False # 👈 Desactiva el producto
                     
-            # 3. Realizar el borrado suave de la categoría
-            categoria.deleted_at = datetime.now()
-            
-            await session.commit()
-            await session.refresh(categoria)
+            # 3. Marcar la categoría como inactiva para que deje de aparecer
+            #    (esto evita depender exclusivamente de la columna `deleted_at`,
+            #     por si la columna no existe en la base de datos)
+            try:
+                categoria.activa = False
+            except Exception:
+                # por seguridad, ignoramos errores al setear atributos
+                pass
+
+            # Commit inicial: persistir cambios de 'activo' en productos y 'activa' en categoría
+            try:
+                await session.commit()
+            except Exception:
+                await session.rollback()
+                return False
+
+            # Intentar en una segunda operación actualizar 'deleted_at' si la columna existe
+            try:
+                ts = datetime.now()
+                await session.execute(text("UPDATE categoria SET deleted_at = :ts WHERE id = :id"), {"ts": ts, "id": id})
+                await session.commit()
+            except Exception:
+                # Si falla (por ejemplo: columna no existe), no bloqueamos la operación.
+                try:
+                    await session.rollback()
+                except Exception:
+                    pass
+
+            # Refrescar entidad para el retorno (si es posible)
+            try:
+                await session.refresh(categoria)
+            except Exception:
+                pass
+
             return True
         
         return False
