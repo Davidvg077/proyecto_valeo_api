@@ -58,45 +58,39 @@ async def eliminar_categoria(id: int):
         categoria = result.first()
         if not categoria:
             print(f"[crud.eliminar_categoria] categoria no encontrada id={id}")
+            return False
         else:
             print(f"[crud.eliminar_categoria] categoria encontrada id={id}, productos={len(categoria.productos)}")
         
-        if categoria:
-            # 2. Desactivar todos los productos asociados
-            for producto in categoria.productos:
-                try:
-                    print(f"[crud.eliminar_categoria] procesando producto id={producto.id} deleted_at={producto.deleted_at} activo={producto.activo}")
-                except Exception:
-                    print("[crud.eliminar_categoria] error leyendo atributos del producto")
-                if producto.deleted_at is None:
-                    producto.activo = False # 👈 Desactiva el producto
-                    producto.deleted_at = datetime.now() # 👈 Soft-delete en cascada para el producto
-                    
-            # 3. Marcar la categoría como inactiva y aplicar soft-delete
+        # 2. Desactivar todos los productos asociados
+        for producto in categoria.productos:
             try:
-                categoria.activa = False
-                categoria.deleted_at = datetime.now()
+                print(f"[crud.eliminar_categoria] procesando producto id={producto.id} deleted_at={producto.deleted_at} activo={producto.activo}")
             except Exception:
-                print(f"[crud.eliminar_categoria] error seteando atributos de categoria id={id}")
+                print("[crud.eliminar_categoria] error leyendo atributos del producto")
+            if producto.deleted_at is None:
+                producto.activo = False # 👈 Desactiva el producto
+                producto.deleted_at = datetime.now() # 👈 Soft-delete en cascada para el producto
+                
+        # 3. Marcar la categoría como inactiva y aplicar soft-delete
+        try:
+            categoria.activa = False
+            categoria.deleted_at = datetime.now()
+            print(f"[crud.eliminar_categoria] categoria marcada para eliminar: activa={categoria.activa}, deleted_at={categoria.deleted_at}")
+        except Exception as e:
+            print(f"[crud.eliminar_categoria] error seteando atributos de categoria id={id}: {e}")
+            await session.rollback()
+            return False
 
-            # Commit final: persistir cambios de productos y categoría (incluyendo deleted_at)
-            try:
-                await session.commit()
-                print(f"[crud.eliminar_categoria] commit final successful for id={id}")
-            except Exception as e:
-                print(f"[crud.eliminar_categoria] commit final fallo para id={id}: {e}")
-                await session.rollback()
-                return False
-
-            # Refrescar entidad para el retorno (si es posible)
-            try:
-                await session.refresh(categoria)
-            except Exception:
-                pass
-
+        # Commit final: persistir cambios de productos y categoría (incluyendo deleted_at)
+        try:
+            await session.commit()
+            print(f"[crud.eliminar_categoria] commit final successful for id={id}")
             return True
-        
-        return False
+        except Exception as e:
+            print(f"[crud.eliminar_categoria] commit final fallo para id={id}: {e}")
+            await session.rollback()
+            return False
 
 async def obtener_categoria_con_productos(id: int):
     async with AsyncSession(async_engine) as session:
