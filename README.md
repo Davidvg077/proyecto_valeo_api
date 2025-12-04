@@ -1,5 +1,12 @@
 
 
+# Descripción del Proyecto
+
+Este proyecto es un Sistema Web de Gestión de Inventario para la empresa **Industrias Valeo S.A.S.**, desarrollado con FastAPI, SQLModel, HTML, CSS y JavaScript.
+El sistema permite administrar el inventario real de la empresa, incluyendo categorías, productos, clientes y control de ventas.
+
+El sistema está desplegado en una URL pública, accesible desde cualquier dispositivo, y la información se gestiona mediante formularios web fáciles de usar.
+
 # Tecnologías Utilizadas
 
 | Tecnología   | Uso                                      |
