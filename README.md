@@ -41,6 +41,7 @@ El sistema está desplegado en una URL pública, accesible desde cualquier dispo
 - **Búsqueda y filtros dentro del mismo sitio**
   - Barra de navegación y filtros en cada módulo.
 
+
 ## Tecnologías Utilizadas
 
 | Tecnología   | Uso                                      |
