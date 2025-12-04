@@ -10,10 +10,12 @@ La API incluye funcionalidades como:
 - Validaciones con Pydantic para asegurar la integridad de los datos.
 
 ## Tecnologías Utilizadas
-- **FastAPI**: Framework para construir APIs web rápidas y modernas.
-- **SQLModel**: Librería para trabajar con SQLAlchemy y Pydantic, facilitando el manejo de modelos de base de datos.
-- **SQLite**: Base de datos ligera y embebida.
-- **Pydantic**: Para validación de datos y esquemas.
+**FastAPI**: Framework para construir APIs web rápidas y modernas.
+**SQLModel**: Librería para trabajar con SQLAlchemy y Pydantic, facilitando el manejo de modelos de base de datos.
+**SQLite**: Base de datos ligera y embebida.
+**Pydantic**: Para validación de datos y esquemas.
+**CSS**: Para el diseño y estilos de la interfaz web (ubicado en `static/css/style.css`).
+**JavaScript**: Para la interacción dinámica en la web, formularios y llamadas a la API (ubicado en `static/js/productos_read.js` y scripts en los templates HTML).
 
 ## Instalación
 1. Clona el repositorio:
