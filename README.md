@@ -1,48 +1,6 @@
 
-# Inventario Industrias Valeo S.A.S
 
-## Descripción del Proyecto
-Este proyecto es un Sistema Web de Gestión de Inventario para la empresa **Industrias Valeo S.A.S.**, desarrollado con FastAPI, SQLModel, HTML, CSS y JavaScript.
-El sistema permite administrar el inventario real de la empresa, incluyendo categorías, productos, clientes y control de ventas.
-
-El sistema está desplegado en una URL pública, accesible desde cualquier dispositivo, y la información se gestiona mediante formularios web fáciles de usar.
-
-## Funcionalidades Principales
-
-- **Gestión de Categorías**
-  - Crear, listar, filtrar, actualizar y desactivar categorías (CRUD completo).
-
-- **Gestión de Productos**
-  - Registrar productos con imagen, descripción, precio y stock.
-  - Actualizar, desactivar y visualizar toda la información.
-
-- **Gestión de Clientes**
-  - Registrar y consultar la información de clientes que realizan compras.
-
-- **Registros de Ventas**
-  - Control del ingreso y egreso de productos al inventario mediante ventas.
-
-- **Relación entre datos del inventario**
-  - Los productos se vinculan directamente a su categoría.
-
-- **Dashboard Analítico en tiempo real 📊**
-  - Estadísticas como:
-    - Ingresos totales
-    - Promedio mensual de ingresos
-    - Cantidad de productos
-    - Cantidad de categorías
-    - Gráficas de ventas mensuales
-    - Distribución de ventas por categoría
-    - Top 5 productos más vendidos
-
-- **Validaciones de datos en el Front y en el Back**
-  - Para evitar información inconsistente.
-
-- **Búsqueda y filtros dentro del mismo sitio**
-  - Barra de navegación y filtros en cada módulo.
-
-
-## Tecnologías Utilizadas
+# Tecnologías Utilizadas
 
 | Tecnología   | Uso                                      |
 | ------------ | ---------------------------------------- |
@@ -57,13 +15,6 @@ El sistema está desplegado en una URL pública, accesible desde cualquier dispo
 
 Optimizar el control de inventarios de la empresa Industrias Valeo S.A.S., ofreciendo una herramienta centralizada para administrar productos, clientes y ventas, mejorando el proceso operativo y la toma de decisiones mediante reportes visuales.
 
-## Tecnologías Utilizadas
-**FastAPI**: Framework para construir APIs web rápidas y modernas.
-**SQLModel**: Librería para trabajar con SQLAlchemy y Pydantic, facilitando el manejo de modelos de base de datos.
-**SQLite**: Base de datos ligera y embebida.
-**Pydantic**: Para validación de datos y esquemas.
-**CSS**: Para el diseño y estilos de la interfaz web (ubicado en `static/css/style.css`).
-**JavaScript**: Para la interacción dinámica en la web, formularios y llamadas a la API (ubicado en `static/js/productos_read.js` y scripts en los templates HTML).
 
 ## Instalación
 1. Clona el repositorio:
