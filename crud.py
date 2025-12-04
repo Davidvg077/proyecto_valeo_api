@@ -70,39 +70,23 @@ async def eliminar_categoria(id: int):
                     print("[crud.eliminar_categoria] error leyendo atributos del producto")
                 if producto.deleted_at is None:
                     producto.activo = False # 👈 Desactiva el producto
+                    producto.deleted_at = datetime.now() # 👈 Soft-delete en cascada para el producto
                     
-            # 3. Marcar la categoría como inactiva para que deje de aparecer
-            #    (esto evita depender exclusivamente de la columna `deleted_at`,
-            #     por si la columna no existe en la base de datos)
+            # 3. Marcar la categoría como inactiva y aplicar soft-delete
             try:
                 categoria.activa = False
+                categoria.deleted_at = datetime.now()
             except Exception:
-                # por seguridad, ignoramos errores al setear atributos
-                pass
+                print(f"[crud.eliminar_categoria] error seteando atributos de categoria id={id}")
 
-            # Commit inicial: persistir cambios de 'activo' en productos y 'activa' en categoría
+            # Commit final: persistir cambios de productos y categoría (incluyendo deleted_at)
             try:
                 await session.commit()
-                print(f"[crud.eliminar_categoria] commit inicial successful for id={id}")
-            except Exception:
-                print(f"[crud.eliminar_categoria] commit inicial fallo para id={id}")
+                print(f"[crud.eliminar_categoria] commit final successful for id={id}")
+            except Exception as e:
+                print(f"[crud.eliminar_categoria] commit final fallo para id={id}: {e}")
                 await session.rollback()
                 return False
-
-            # Intentar en una segunda operación actualizar 'deleted_at' si la columna existe
-            try:
-                ts = datetime.now()
-                print(f"[crud.eliminar_categoria] intentando set deleted_at en tabla raw para id={id}")
-                await session.execute(text("UPDATE categoria SET deleted_at = :ts WHERE id = :id"), {"ts": ts, "id": id})
-                await session.commit()
-                print(f"[crud.eliminar_categoria] updated deleted_at raw successful for id={id}")
-            except Exception as e:
-                # Si falla (por ejemplo: columna no existe), no bloqueamos la operación.
-                print(f"[crud.eliminar_categoria] fallo al actualizar deleted_at raw: {e}")
-                try:
-                    await session.rollback()
-                except Exception:
-                    pass
 
             # Refrescar entidad para el retorno (si es posible)
             try:
