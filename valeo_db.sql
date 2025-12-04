@@ -23,18 +23,18 @@ CREATE TABLE IF NOT EXISTS ventas (
 
 -- INSERTAR PRODUCTOS
 INSERT INTO productos (nombre_producto, referencia, categoria, costo_fabricacion, precio_venta, stock_actual, stock_minimo, ubicacion_bodega, estado) VALUES
-('Parrilla Samurai ', 'PAR-CAN-001', 'Ventiladores', 8500.00, 15000.00, 45, 10, 'Bodega A1', 'activo'),
-('Guarda polvo para parrilla', 'PAR-GDP-002', 'Parrillas', 3200.00, 6500.00, 80, 15, 'Bodega A2', 'activo'),
-('Pito imusa para olla', 'OLL-PIT-003', 'Ollas', 1800.00, 3500.00, 120, 20, 'Bodega B1', 'activo'),
-('Manija corona para olla', 'OLL-MAN-004', 'Ollas', 2500.00, 4800.00, 95, 15, 'Bodega B1', 'activo'),
-('Cuchilla oster para licuadora', 'LIC-CUC-005', 'Licuadoras', 6500.00, 12000.00, 60, 12, 'Bodega C1', 'activo'),
-('Base de capuchon Oster', 'LIC-CAP-006', 'Licuadoras', 4200.00, 8500.00, 55, 10, 'Bodega C1', 'activo'),
-('Base optimix de licuadora', 'LIC-BAS-007', 'Licuadoras', 12000.00, 22000.00, 35, 8, 'Bodega C2', 'activo'),
-('Acople optimix de licuadora', 'LIC-ACO-008', 'Licuadoras', 3800.00, 7500.00, 70, 15, 'Bodega C1', 'activo'),
-('Tapa oster de licuadora', 'LIC-TAP-009', 'Licuadoras', 5500.00, 10500.00, 50, 10, 'Bodega C1', 'activo'),
-('Tapa optimix de licuadora', 'LIC-DOS-010', 'Licuadoras', 2800.00, 5500.00, 65, 12, 'Bodega C1', 'activo'),
-('Aspa samurai de ventilador', 'VNT-ASP-011', 'Ventiladores', 9500.00, 18000.00, 40, 8, 'Bodega A1', 'activo'),
-('Tapa trebol de licuadora', 'LIC-TVA-012', 'Licuadoras', 4800.00, 9000.00, 48, 10, 'Bodega C1', 'activo');
+('Parrilla Samurai ', 'PAR-CAN-001', 'Ventiladores', 8500.00, 16000.00, 45, 10, 'Bodega A1', 'activo'),
+('Guarda polvo para parrilla', 'PAR-GDP-002', 'Parrillas', 1500.00, 2500.00, 80, 15, 'Bodega A2', 'activo'),
+('Pito imusa para olla', 'OLL-PIT-003', 'Ollas', 800.00, 1500.00, 120, 20, 'Bodega B1', 'activo'),
+('Manija corona para olla', 'OLL-MAN-004', 'Ollas', 1500.00, 2500.00, 95, 15, 'Bodega B1', 'activo'),
+('Cuchilla oster para licuadora', 'LIC-CUC-005', 'Licuadoras', 10000.00, 18000.00, 60, 12, 'Bodega C1', 'activo'),
+('Base de capuchon Oster', 'LIC-CAP-006', 'Licuadoras', 2500.00, 4000.00, 55, 10, 'Bodega C1', 'activo'),
+('Base optimix de licuadora', 'LIC-BAS-007', 'Licuadoras', 800.00, 1500.00, 35, 8, 'Bodega C2', 'activo'),
+('Acople optimix de licuadora', 'LIC-ACO-008', 'Licuadoras', 300.00, 1200.00, 70, 15, 'Bodega C1', 'activo'),
+('Tapa oster de licuadora', 'LIC-TAP-009', 'Licuadoras', 1000.00, 1600.00, 50, 10, 'Bodega C1', 'activo'),
+('Tapa optimix de licuadora', 'LIC-DOS-010', 'Licuadoras', 1000.00, 1500.00, 65, 12, 'Bodega C1', 'activo'),
+('Aspa samurai de ventilador', 'VNT-ASP-011', 'Ventiladores', 3500.00, 5000.00, 40, 8, 'Bodega A1', 'activo'),
+('Tapa trebol de licuadora', 'LIC-TVA-012', 'Licuadoras', 2500.00, 4000.00, 48, 10, 'Bodega C1', 'activo');
 
 -- INSERTAR 200 VENTAS (2023-2024)
 INSERT INTO ventas (id_producto, fecha_venta, cantidad_vendida) VALUES
