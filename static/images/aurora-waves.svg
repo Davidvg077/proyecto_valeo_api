@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 560" fill="none">
+  <defs>
+    <linearGradient id="aurora" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#668EAD" stop-opacity="0"/>
+      <stop offset=".16" stop-color="#579CCB" stop-opacity=".9"/>
+      <stop offset=".34" stop-color="#C6DCEB" stop-opacity=".96"/>
+      <stop offset=".51" stop-color="#286F9F" stop-opacity=".84"/>
+      <stop offset=".68" stop-color="#D7E3EB" stop-opacity=".98"/>
+      <stop offset=".84" stop-color="#4B91BF" stop-opacity=".88"/>
+      <stop offset="1" stop-color="#668EAD" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-50%" width="120%" height="200%">
+      <feGaussianBlur stdDeviation="21"/>
+    </filter>
+  </defs>
+  <g stroke="url(#aurora)" stroke-linecap="round">
+    <path d="M-90 350C120 188 250 150 425 238s251 171 438 68 288-207 478-104 209 132 270 128" stroke-width="82" filter="url(#soft)" opacity=".94"/>
+    <path d="M-80 390C126 229 264 193 437 278s256 155 432 57 288-184 463-92 220 120 288 116" stroke-width="4" opacity=".58"/>
+    <path d="M-110 285C75 168 235 110 392 176s237 156 422 90 275-198 459-135 253 116 328 80" stroke-width="2.8" opacity=".5"/>
+    <path d="M-100 442C96 310 261 274 422 337s242 116 414 47 292-152 457-76 254 109 326 93" stroke-width="3" opacity=".46"/>
+  </g>
+</svg>

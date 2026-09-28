@@ -1,0 +1,773 @@
+{
+  "categories": [
+    {
+      "id": "ventiladores",
+      "name": "Ventiladores",
+      "description": "Repuestos para diferentes modelos y referencias de ventiladores.",
+      "count": 23,
+      "image": "/static/images/productos/ventiladores/01-aspa-compatible-con-alteza.jpg",
+      "groups": [
+        {
+          "id": "repuestos-para-ventiladores",
+          "name": "Repuestos para ventiladores"
+        }
+      ]
+    },
+    {
+      "id": "licuadoras",
+      "name": "Licuadoras",
+      "description": "Repuestos y componentes para diferentes líneas de licuadoras.",
+      "count": 51,
+      "image": "/static/images/productos/licuadoras/15-vaso-compatible-con-oster-eco.jpg",
+      "groups": [
+        {
+          "id": "acoples-para-la-licuadora",
+          "name": "Acoples para la licuadora"
+        },
+        {
+          "id": "vasos-para-licuadora",
+          "name": "Vasos para licuadora"
+        },
+        {
+          "id": "base-cuchillas-para-licuadora",
+          "name": "Base cuchillas para licuadora"
+        },
+        {
+          "id": "bases-para-licuadoras",
+          "name": "Bases para licuadoras"
+        },
+        {
+          "id": "tapas-para-licuadora",
+          "name": "Tapas para licuadora"
+        }
+      ]
+    },
+    {
+      "id": "ollas",
+      "name": "Ollas a presión",
+      "description": "Repuestos y accesorios para diferentes modelos de ollas a presión.",
+      "count": 14,
+      "image": "/static/images/productos/ollas/04-manija-compatible-con-imusa.jpg",
+      "groups": [
+        {
+          "id": "manijas-para-la-olla",
+          "name": "Manijas para la olla"
+        },
+        {
+          "id": "pitos-para-olla",
+          "name": "Pitos para olla"
+        },
+        {
+          "id": "varillas-para-olla",
+          "name": "Varillas para olla"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "licuadoras-01",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople amarillo 6/14",
+      "image": "/static/images/productos/licuadoras/01-acople-amarillo-6-14.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-02",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople negro 6/18",
+      "image": "/static/images/productos/licuadoras/02-acople-negro-6-18.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-03",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople sirve para licuadora B/D",
+      "image": "/static/images/productos/licuadoras/03-acople-compatible-con-licuadora-b-d.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-04",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople B/D motor",
+      "image": "/static/images/productos/licuadoras/04-acople-b-d-motor.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-05",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople B/D solo y con tuerca",
+      "image": "/static/images/productos/licuadoras/05-acople-b-d-solo-y-con-tuerca.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-06",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople chino motor grande",
+      "image": "/static/images/productos/licuadoras/06-acople-chino-motor-grande.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-07",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople chino motor pequeño",
+      "image": "/static/images/productos/licuadoras/07-acople-chino-motor-peque-o.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-08",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople sirve para Holstein cuchilla",
+      "image": "/static/images/productos/licuadoras/08-acople-compatible-con-holstein-cuchilla.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-09",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople sirve para Holstein motor",
+      "image": "/static/images/productos/licuadoras/09-acople-compatible-con-holstein-motor.jpg",
+      "sourcePage": 2
+    },
+    {
+      "id": "licuadoras-10",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople licua",
+      "image": "/static/images/productos/licuadoras/10-acople-licua.jpg",
+      "sourcePage": 3
+    },
+    {
+      "id": "licuadoras-11",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople L motor",
+      "image": "/static/images/productos/licuadoras/11-acople-l-motor.jpg",
+      "sourcePage": 3
+    },
+    {
+      "id": "licuadoras-12",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople L solo y completo",
+      "image": "/static/images/productos/licuadoras/12-acople-l-solo-y-completo.jpg",
+      "sourcePage": 3
+    },
+    {
+      "id": "licuadoras-13",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople OPT solo",
+      "image": "/static/images/productos/licuadoras/13-acople-opt-solo.jpg",
+      "sourcePage": 3
+    },
+    {
+      "id": "licuadoras-14",
+      "category": "licuadoras",
+      "group": "Acoples para la licuadora",
+      "name": "Acople OPT completo con bolsa",
+      "image": "/static/images/productos/licuadoras/14-acople-opt-completo-con-bolsa.jpg",
+      "sourcePage": 3
+    },
+    {
+      "id": "ventiladores-01",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa sirve para Alteza",
+      "image": "/static/images/productos/ventiladores/01-aspa-compatible-con-alteza.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-02",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa Picoloro 16\" colores",
+      "image": "/static/images/productos/ventiladores/02-aspa-picoloro-16-colores.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-03",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa Picoloro 18\" colores",
+      "image": "/static/images/productos/ventiladores/03-aspa-picoloro-18-colores.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-04",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa sirve para Air Protec",
+      "image": "/static/images/productos/ventiladores/04-aspa-compatible-con-air-protec.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-05",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa sirve para Samurai Turbo",
+      "image": "/static/images/productos/ventiladores/05-aspa-compatible-con-samurai-turbo.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-06",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Aspa pasador y media caña, sirve para Nipon",
+      "image": "/static/images/productos/ventiladores/06-aspa-pasador-y-media-ca-a-compatible-con-nipon.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-07",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Parrilla sirve para Samurai negra",
+      "image": "/static/images/productos/ventiladores/07-parrilla-compatible-con-samurai-negra.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-08",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Parrilla sirve para Samurai blanca",
+      "image": "/static/images/productos/ventiladores/08-parrilla-compatible-con-samurai-blanca.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-09",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Cuello nuevo",
+      "image": "/static/images/productos/ventiladores/09-cuello-nuevo.jpg",
+      "sourcePage": 4
+    },
+    {
+      "id": "ventiladores-10",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Frentera Turbo negra",
+      "image": "/static/images/productos/ventiladores/10-frentera-turbo-negra.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-11",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Frentera Turbo blanca",
+      "image": "/static/images/productos/ventiladores/11-frentera-turbo-blanca.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-12",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Cuello Turbo blanco",
+      "image": "/static/images/productos/ventiladores/12-cuello-turbo-blanco.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-13",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Cuello Turbo negro",
+      "image": "/static/images/productos/ventiladores/13-cuello-turbo-negro.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-14",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Cuello Turbo gris",
+      "image": "/static/images/productos/ventiladores/14-cuello-turbo-gris.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-15",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Perilla de oscilacion gris, blanca y negra",
+      "image": "/static/images/productos/ventiladores/15-perilla-de-oscilacion-gris-blanca-y-negra.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-16",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Rosca parrilla blanca",
+      "image": "/static/images/productos/ventiladores/16-rosca-parrilla-blanca.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-17",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Rosca parrilla negra",
+      "image": "/static/images/productos/ventiladores/17-rosca-parrilla-negra.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-18",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Rosca Turbo pico corto",
+      "image": "/static/images/productos/ventiladores/18-rosca-turbo-pico-corto.jpg",
+      "sourcePage": 5
+    },
+    {
+      "id": "ventiladores-19",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Rosca Turbo pico largo",
+      "image": "/static/images/productos/ventiladores/19-rosca-turbo-pico-largo.jpg",
+      "sourcePage": 6
+    },
+    {
+      "id": "ventiladores-20",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Pedestal sirve para Samurai blanco",
+      "image": "/static/images/productos/ventiladores/20-pedestal-compatible-con-samurai-blanco.jpg",
+      "sourcePage": 6
+    },
+    {
+      "id": "ventiladores-21",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Pedestal sirve para Samurai negro",
+      "image": "/static/images/productos/ventiladores/21-pedestal-compatible-con-samurai-negro.jpg",
+      "sourcePage": 6
+    },
+    {
+      "id": "ventiladores-22",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Carcasa Turbo negra",
+      "image": "/static/images/productos/ventiladores/22-carcasa-turbo-negra.jpg",
+      "sourcePage": 6
+    },
+    {
+      "id": "ventiladores-23",
+      "category": "ventiladores",
+      "group": "Repuestos para ventiladores",
+      "name": "Carcasa Turbo blanca",
+      "image": "/static/images/productos/ventiladores/23-carcasa-turbo-blanca.jpg",
+      "sourcePage": 6
+    },
+    {
+      "id": "licuadoras-15",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para Oster Eco",
+      "image": "/static/images/productos/licuadoras/15-vaso-compatible-con-oster-eco.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-16",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para vaso Oster irrompible",
+      "image": "/static/images/productos/licuadoras/16-vaso-compatible-con-vaso-oster-irrompible.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-17",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso compotero sirve para Oster",
+      "image": "/static/images/productos/licuadoras/17-vaso-compotero-compatible-con-oster.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-18",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para Optimix",
+      "image": "/static/images/productos/licuadoras/18-vaso-compatible-con-optimix.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-19",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso irrompible sirve para Optimix",
+      "image": "/static/images/productos/licuadoras/19-vaso-irrompible-compatible-con-optimix.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-20",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso LX Eco",
+      "image": "/static/images/productos/licuadoras/20-vaso-lx-eco.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-21",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso LX irrompible",
+      "image": "/static/images/productos/licuadoras/21-vaso-lx-irrompible.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-22",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para Imusa",
+      "image": "/static/images/productos/licuadoras/22-vaso-compatible-con-imusa.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-23",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso irrompible sirve para Imusa",
+      "image": "/static/images/productos/licuadoras/23-vaso-irrompible-compatible-con-imusa.jpg",
+      "sourcePage": 7
+    },
+    {
+      "id": "licuadoras-24",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para B/D rosca ancha",
+      "image": "/static/images/productos/licuadoras/24-vaso-compatible-con-b-d-rosca-ancha.jpg",
+      "sourcePage": 8
+    },
+    {
+      "id": "licuadoras-25",
+      "category": "licuadoras",
+      "group": "Vasos para licuadora",
+      "name": "Vaso sirve para B/D rosca pequeña",
+      "image": "/static/images/productos/licuadoras/25-vaso-compatible-con-b-d-rosca-peque-a.jpg",
+      "sourcePage": 8
+    },
+    {
+      "id": "licuadoras-26",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla 6/14 blanca y negra",
+      "image": "/static/images/productos/licuadoras/26-base-cuchilla-6-14-blanca-y-negra.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-27",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla 6/18 blanca y negra",
+      "image": "/static/images/productos/licuadoras/27-base-cuchilla-6-18-blanca-y-negra.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-28",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla Coro blanca y negra",
+      "image": "/static/images/productos/licuadoras/28-base-cuchilla-coro-blanca-y-negra.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-29",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla Nowaker completa",
+      "image": "/static/images/productos/licuadoras/29-base-cuchilla-nowaker-completa.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-30",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla Nowaker tipo nueva",
+      "image": "/static/images/productos/licuadoras/30-base-cuchilla-nowaker-tipo-nueva.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-31",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla small",
+      "image": "/static/images/productos/licuadoras/31-base-cuchilla-small.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-32",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Cuchilla sirve para Samura LX",
+      "image": "/static/images/productos/licuadoras/32-cuchilla-sirve-para-samura-lx.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-33",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Cuchilla sirve para Imusa IF",
+      "image": "/static/images/productos/licuadoras/33-cuchilla-sirve-para-imusa-if.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-34",
+      "category": "licuadoras",
+      "group": "Base cuchillas para licuadora",
+      "name": "Base cuchilla Nowaker completa",
+      "image": "/static/images/productos/licuadoras/34-base-cuchilla-nowaker-completa.jpg",
+      "sourcePage": 9
+    },
+    {
+      "id": "licuadoras-35",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base sirve para Imusa blanca y negra",
+      "image": "/static/images/productos/licuadoras/35-base-compatible-con-imusa-blanca-y-negra.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-36",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base L400",
+      "image": "/static/images/productos/licuadoras/36-base-l400.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-37",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base LX",
+      "image": "/static/images/productos/licuadoras/37-base-lx.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-38",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base sirve para Optimix colores",
+      "image": "/static/images/productos/licuadoras/38-base-compatible-con-optimix-colores.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-39",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base OST 3 puntas",
+      "image": "/static/images/productos/licuadoras/39-base-ost-3-puntas.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-40",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base OST 5 puntas",
+      "image": "/static/images/productos/licuadoras/40-base-ost-5-puntas.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-41",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base OST 6 puntas",
+      "image": "/static/images/productos/licuadoras/41-base-ost-6-puntas.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-42",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base sirve para B/D R ancha",
+      "image": "/static/images/productos/licuadoras/42-base-compatible-con-b-d-r-ancha.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-43",
+      "category": "licuadoras",
+      "group": "Bases para licuadoras",
+      "name": "Base sirve para B/D R peque",
+      "image": "/static/images/productos/licuadoras/43-base-compatible-con-b-d-r-peque.jpg",
+      "sourcePage": 10
+    },
+    {
+      "id": "licuadoras-44",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa sirve para B/D blanca y negra",
+      "image": "/static/images/productos/licuadoras/44-tapa-compatible-con-b-d-blanca-y-negra.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-45",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa sirve para Imusa",
+      "image": "/static/images/productos/licuadoras/45-tapa-compatible-con-imusa.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-46",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa LX blanca y negra",
+      "image": "/static/images/productos/licuadoras/46-tapa-lx-blanca-y-negra.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-47",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa sirve para Optimix de colores",
+      "image": "/static/images/productos/licuadoras/47-tapa-compatible-con-optimix-de-colores.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-48",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa sirve para Oster",
+      "image": "/static/images/productos/licuadoras/48-tapa-compatible-con-oster.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-49",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Tapa sirve para Oster trebol",
+      "image": "/static/images/productos/licuadoras/49-tapa-compatible-con-oster-trebol.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-50",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Visor tapa LX",
+      "image": "/static/images/productos/licuadoras/50-visor-tapa-lx.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "licuadoras-51",
+      "category": "licuadoras",
+      "group": "Tapas para licuadora",
+      "name": "Visor tapa O",
+      "image": "/static/images/productos/licuadoras/51-visor-tapa-o.jpg",
+      "sourcePage": 11
+    },
+    {
+      "id": "ollas-01",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Aza multiusos",
+      "image": "/static/images/productos/ollas/01-aza-multiusos.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-02",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija sirve para Corona olla",
+      "image": "/static/images/productos/ollas/02-manija-compatible-con-corona-olla.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-03",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Cacha sirve para Corona olla",
+      "image": "/static/images/productos/ollas/03-cacha-compatible-con-corona-olla.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-04",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija sirve para Imusa",
+      "image": "/static/images/productos/ollas/04-manija-compatible-con-imusa.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-05",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija sirve para India nueva",
+      "image": "/static/images/productos/ollas/05-manija-compatible-con-india-nueva.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-06",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija sirve para Nova",
+      "image": "/static/images/productos/ollas/06-manija-compatible-con-nova.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-07",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija roja completa",
+      "image": "/static/images/productos/ollas/07-manija-roja-completa.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-08",
+      "category": "ollas",
+      "group": "Manijas para la olla",
+      "name": "Manija roja sola",
+      "image": "/static/images/productos/ollas/08-manija-roja-sola.jpg",
+      "sourcePage": 12
+    },
+    {
+      "id": "ollas-09",
+      "category": "ollas",
+      "group": "Pitos para olla",
+      "name": "Pito sirve para Corona",
+      "image": "/static/images/productos/ollas/09-pito-compatible-con-corona.jpg",
+      "sourcePage": 13
+    },
+    {
+      "id": "ollas-10",
+      "category": "ollas",
+      "group": "Pitos para olla",
+      "name": "Pito sirve para Imusa",
+      "image": "/static/images/productos/ollas/10-pito-compatible-con-imusa.jpg",
+      "sourcePage": 13
+    },
+    {
+      "id": "ollas-11",
+      "category": "ollas",
+      "group": "Pitos para olla",
+      "name": "Pito sirve para Nova",
+      "image": "/static/images/productos/ollas/11-pito-compatible-con-nova.jpg",
+      "sourcePage": 13
+    },
+    {
+      "id": "ollas-12",
+      "category": "ollas",
+      "group": "Varillas para olla",
+      "name": "Varilla sirve para Corona tapa",
+      "image": "/static/images/productos/ollas/12-varilla-compatible-corona-tapa.jpg",
+      "sourcePage": 13
+    },
+    {
+      "id": "ollas-13",
+      "category": "ollas",
+      "group": "Varillas para olla",
+      "name": "Varilla sirve para U/SAL 4 litros",
+      "image": "/static/images/productos/ollas/13-varilla-compatible-u-sal-4-litros.jpg",
+      "sourcePage": 13
+    },
+    {
+      "id": "ollas-14",
+      "category": "ollas",
+      "group": "Varillas para olla",
+      "name": "Varilla sirve para U/SAL 8 litros",
+      "image": "/static/images/productos/ollas/14-varilla-compatbile-u-sal-8-litros.jpg",
+      "sourcePage": 13
+    }
+  ]
+}

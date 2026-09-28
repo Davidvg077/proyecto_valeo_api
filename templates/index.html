@@ -3,83 +3,392 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tienda - Gestión de Inventario</title>
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="Industrias Valeo S.A.S. ofrece repuestos de calidad para ventiladores, licuadoras y ollas a presión, con atención confiable y cobertura nacional." />
+    <title>Industrias Valeo S.A.S. | Repuestos para electrodomésticos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/site.js" defer></script>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="/">Inicio</a>
-        <div class="dropdown">
-            <button class="dropbtn">Categorías</button>
-            <div class="dropdown-content">
-                <a href="/categorias/create">Crear Categoría</a>
-                <a href="/categorias/read">Ver Categorías</a>
-                <a href="/categorias/update">Actualizar Categoría</a>
-                <a href="/categorias/delete">Eliminar Categoría</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Productos</button>
-            <div class="dropdown-content">
-                <a href="/productos/create">Crear Producto</a>
-                <a href="/productos/read">Ver Productos</a>
-                <a href="/productos/update">Actualizar Producto</a>
-                <a href="/productos/delete">Eliminar Producto</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Clientes</button>
-            <div class="dropdown-content">
-                <a href="/clientes/create">Crear Cliente</a>
-                <a href="/clientes/read">Ver Clientes</a>
-                <a href="/clientes/update">Actualizar Cliente</a>
-                <a href="/clientes/delete">Eliminar Cliente</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Ventas</button>
-            <div class="dropdown-content">
-                <a href="/ventas/create">Crear Venta</a>
-                <a href="/ventas/read">Ver Ventas</a>
-            </div>
-        </div>
-        <a href="/charts">📊 Dashboard</a>
-        <a href="/historial">Historial</a>
-        <a href="/developer-info">Información del Desarrollador</a>
-        <a href="/planning">Planificación</a>
-        <a href="/design">Diseño</a>
-        <a href="/informacion-del-proyecto">Información del Proyecto</a>
-    </nav>
-    <div class="container">
-        <h1>Inventario de industrias Valeo S.A.S <img src="/static/imagen.jpeg" alt="Valeo Logo"></h1>
+    <header class="site-header">
+        <nav class="navbar container-wide" aria-label="Navegación principal">
+            <a class="brand" href="#inicio" aria-label="Industrias Valeo S.A.S., inicio">
+                <span class="official-logo official-logo-header">
+                    <img class="official-logo-image" src="/static/images/logos/logo-valeo-horizontal.png" alt="Logo oficial de Industrias Valeo S.A.S." />
+                </span>
+            </a>
 
-        <div class="home-sections">
-            <div class="section-card">
-                <h2>Categorías</h2>
-                <p>Gestiona las categorías de productos.</p>
-                <a href="/categorias/read" class="btn">Ver Categorías</a>
+            <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-menu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <button class="menu-backdrop" type="button" aria-label="Cerrar menú" aria-hidden="true" tabindex="-1" hidden></button>
+            <div class="nav-content" id="primary-menu">
+                <div class="nav-menu-heading">
+                    <span>Menú principal</span>
+                    <button class="nav-menu-close" type="button" aria-label="Cerrar menú">
+                        <span aria-hidden="true">×</span>
+                        Cerrar
+                    </button>
+                </div>
+                <div class="nav-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#productos">Productos</a>
+                    <a href="#catalogos">Catálogos</a>
+                    <a href="#cobertura">Cobertura</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <button class="button button-quote nav-quote-button" type="button" data-open-quote>
+                    Mi cotización <span class="quote-count" data-quote-count>0</span>
+                </button>
+                <a class="button button-whatsapp nav-cta" href="https://wa.me/573212533995?text=Hola%2C%20Industrias%20Valeo.%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer" aria-label="Contactar a Industrias Valeo por WhatsApp">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.9 11.9 0 0 0 5.8 1.48h.01C18.66 23.83 24 18.48 24 11.9a11.85 11.85 0 0 0-3.48-8.42ZM12.08 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 0 1-1.52-5.26c0-5.48 4.46-9.94 9.95-9.94a9.88 9.88 0 0 1 7.03 2.91 9.88 9.88 0 0 1 2.91 7.04c0 5.49-4.46 9.95-9.99 9.95Zm5.46-7.45c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.88-.78-1.48-1.75-1.65-2.05-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+                    WhatsApp
+                </a>
             </div>
-            <div class="section-card">
-                <h2>Productos</h2>
-                <p>Administra el inventario de productos.</p>
-                <a href="/productos/read" class="btn">Ver Productos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero section-anchor" id="inicio">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide hero-grid">
+                <div class="hero-copy reveal">
+                    <span class="eyebrow"><span class="eyebrow-line"></span> REPUESTOS PARA ELECTRODOMÉSTICOS</span>
+                    <h1>Repuestos para electrodomésticos<br /><span>fabricados para durar</span></h1>
+                    <p class="hero-lead">En Industrias Valeo S.A.S. fabricamos repuestos genéricos y compatibles para ventiladores, licuadoras y ollas a presión.</p>
+                    <p class="hero-description">Más de 20 años de experiencia en el sector, con atención cercana y envíos a todo Colombia e internacionales.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#productos">Ver productos <span aria-hidden="true">↗</span></a>
+                        <button class="button button-quote hero-quote-button" type="button" data-open-quote>Solicitar cotización <span aria-hidden="true">↗</span></button>
+                    </div>
+                    <div class="hero-trust-points" aria-label="Respaldo comercial">
+                        <span><strong>+20</strong> años de experiencia</span>
+                        <span>Fabricantes de repuestos</span>
+                        <span>Envíos nacionales e internacionales</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal" aria-label="Repuestos reales del catálogo Valeo: ventiladores, licuadoras y ollas a presión">
+                    <div class="hero-products-stage" data-hero-parallax>
+                        <div class="hero-stage-orbit" aria-hidden="true"></div>
+                        <div class="hero-stage-badge"><span></span><span data-hero-product-total>88 referencias · 3 líneas</span></div>
+                        <article class="hero-product-card hero-product-main" data-hero-product-card="ventiladores">
+                            <div class="hero-product-image">
+                                <img src="/static/images/productos/ventiladores/02-aspa-picoloro-16-colores.jpg" alt="Aspa Picoloro de 16 pulgadas, repuesto real para ventilador del catálogo Valeo" />
+                            </div>
+                            <div class="hero-product-label"><span data-hero-product-category>VENTILADORES</span><strong data-hero-product-name>Aspa Picoloro 16&quot; colores</strong></div>
+                        </article>
+                        <article class="hero-product-card hero-product-small hero-product-blender" data-hero-product-card="licuadoras">
+                            <div class="hero-product-image">
+                                <img src="/static/images/productos/licuadoras/26-base-cuchilla-6-14-blanca-y-negra.jpg" alt="Base de cuchilla 6/14 blanca y negra, repuesto real para licuadora del catálogo Valeo" />
+                            </div>
+                            <div class="hero-product-label"><span data-hero-product-category>LICUADORAS</span><strong data-hero-product-name>Base cuchilla 6/14 blanca y negra</strong></div>
+                        </article>
+                        <article class="hero-product-card hero-product-small hero-product-pressure" data-hero-product-card="ollas">
+                            <div class="hero-product-image">
+                                <img src="/static/images/productos/ollas/07-manija-roja-completa.jpg" alt="Manija roja completa, repuesto real para olla a presión del catálogo Valeo" />
+                            </div>
+                            <div class="hero-product-label"><span data-hero-product-category>OLLAS A PRESIÓN</span><strong data-hero-product-name>Manija roja completa</strong></div>
+                        </article>
+                        <div class="hero-carousel-controls" aria-label="Controles del carrusel de productos">
+                            <button class="hero-carousel-button" type="button" data-hero-carousel-prev aria-label="Mostrar productos anteriores">←</button>
+                            <button class="hero-carousel-button hero-carousel-toggle" type="button" data-hero-carousel-toggle aria-label="Pausar carrusel">Ⅱ</button>
+                            <button class="hero-carousel-button" type="button" data-hero-carousel-next aria-label="Mostrar productos siguientes">→</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="section-card">
-                <h2>Clientes</h2>
-                <p>Maneja la información de clientes.</p>
-                <a href="/clientes/read" class="btn">Ver Clientes</a>
+            <a class="scroll-cue" href="#nosotros"><span></span> Descubre Valeo</a>
+        </section>
+
+        <section class="trust-strip" aria-label="Respaldo y cobertura">
+            <div class="container-wide trust-strip-inner">
+                <span><strong>Desde 2001</strong> en el sector</span>
+                <span><strong>Fabricación</strong> y comercialización</span>
+                <span><strong>Colombia</strong> e internacional</span>
             </div>
-            <div class="section-card">
-                <h2>Ventas</h2>
-                <p>Registra y consulta ventas.</p>
-                <a href="/ventas/read" class="btn">Ver Ventas</a>
+        </section>
+
+        <section class="about section-space section-anchor" id="nosotros">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide">
+                <div class="section-heading reveal">
+                    <span class="eyebrow"><span class="eyebrow-line"></span> Conócenos</span>
+                    <h2>Una empresa cercana,<br /><span>un respaldo de confianza.</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-intro reveal">
+                        <span class="overline">QUIÉNES SOMOS</span>
+                        <h3>Experiencia construida junto al sector.</h3>
+                        <p>Somos una empresa colombiana dedicada a fabricar y comercializar repuestos genéricos y compatibles para ventiladores, licuadoras y ollas a presión. Desde 2001 desarrollamos alternativas funcionales para diferentes referencias, con un catálogo enfocado en calidad, disponibilidad y atención al cliente.</p>
+                        <p>El 16 de diciembre de 2014 nos constituimos formalmente como Industrias Valeo S.A.S.</p>
+                        <a class="text-link" href="#trayectoria">Conoce nuestra trayectoria <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="purpose-cards">
+                        <article class="purpose-card reveal">
+                            <div class="purpose-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.2c0 4.8 3.2 8.3 7.5 9.8 4.3-1.5 7.5-5 7.5-9.8V6L12 3Zm0 2.1 5.5 2.2v3.9c0 3.7-2.2 6.5-5.5 7.9-3.3-1.4-5.5-4.2-5.5-7.9V7.3L12 5.1Zm-1 9.6-2.2-2.2-1.4 1.4 3.6 3.6 5.8-5.8-1.4-1.4-4.4 4.4Z"/></svg></div>
+                            <span class="overline">NUESTRA MISIÓN</span>
+                            <h3>Calidad y servicio cercano</h3>
+                            <p>Fabricamos alternativas genéricas y compatibles, funcionales y accesibles para prolongar la vida útil de los electrodomésticos, con atención cercana y precios competitivos.</p>
+                        </article>
+                        <article class="purpose-card purpose-card-blue reveal">
+                            <div class="purpose-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7Zm4.7-11.7-5.4 1.8a1 1 0 0 0-.6.6l-1.8 5.4a.5.5 0 0 0 .6.6l5.4-1.8a1 1 0 0 0 .6-.6l1.8-5.4a.5.5 0 0 0-.6-.6ZM12 13.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z"/></svg></div>
+                            <span class="overline">NUESTRA VISIÓN</span>
+                            <h3>Ser referente nacional</h3>
+                            <p>Fortalecer continuamente nuestro catálogo, procesos y calidad, ampliando nuestra presencia para responder a las necesidades de nuestros clientes.</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="values-row reveal" aria-label="Valores corporativos">
+                    <span class="values-label">Nuestros valores</span>
+                    <span>Calidad</span><span>Cumplimiento</span><span>Atención</span><span>Respaldo</span><span>Confianza</span>
+                </div>
+                <div class="company-timeline reveal" id="trayectoria">
+                    <div class="timeline-intro">
+                        <span class="overline">NUESTRA TRAYECTORIA</span>
+                        <strong>Más de 20 años<br />de experiencia</strong>
+                    </div>
+                    <ol>
+                        <li><strong>2001</strong><span>Inicio de nuestra trayectoria.</span></li>
+                        <li><strong>16 DIC. 2014</strong><span>Constitución de Industrias Valeo S.A.S.</span></li>
+                        <li><strong>HOY</strong><span>Más de 20 años de experiencia al servicio del sector.</span></li>
+                    </ol>
+                </div>
             </div>
-            <div class="section-card">
-                <h2>📊 Dashboard</h2>
-                <p>Visualiza estadísticas y análisis de ventas.</p>
-                <a href="/charts" class="btn">Ver Dashboard</a>
+        </section>
+
+        <section class="products section-space section-anchor" id="productos">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide">
+                <div class="section-heading section-heading-centered reveal">
+                    <span class="eyebrow"><span class="eyebrow-line"></span> Catálogo de repuestos <span class="eyebrow-line"></span></span>
+                    <h2>Explora nuestro catálogo<br /><span>de repuestos.</span></h2>
+                    <p>Selecciona una categoría y consulta repuestos genéricos y compatibles disponibles.</p>
+                </div>
+                <section class="product-browser reveal" id="catalogo-productos" aria-labelledby="product-browser-title">
+                    <h3 class="visually-hidden" id="product-browser-title">Productos por categoría</h3>
+                    <div class="product-tabs" id="product-tabs" role="tablist" aria-label="Categorías de productos"></div>
+                    <div class="product-filters" id="product-filters" role="group" aria-label="Agrupar productos por línea"></div>
+                    <label class="product-search">
+                        <span>Buscar productos</span>
+                        <input id="product-search" type="search" autocomplete="off" placeholder="Nombre, marca o referencia" aria-label="Buscar productos en la categoría seleccionada" aria-controls="product-grid" />
+                    </label>
+                    <p class="product-results-status" id="product-results-status" role="status" aria-live="polite">Cargando catálogo de productos…</p>
+                    <div class="product-grid catalog-product-grid" id="product-grid"></div>
+                    <dialog class="product-image-dialog" id="product-image-dialog" aria-labelledby="product-dialog-title">
+                        <div class="product-dialog-shell">
+                            <form class="product-dialog-close-form" method="dialog">
+                                <button class="product-dialog-close" type="submit" aria-label="Cerrar fotografía ampliada">×</button>
+                            </form>
+                            <div class="product-dialog-layout">
+                                <div class="product-dialog-image-frame">
+                                    <img id="product-dialog-image" alt="" />
+                                </div>
+                                <div class="product-dialog-details">
+                                    <span class="overline" id="product-dialog-category"></span>
+                                    <h3 id="product-dialog-title"></h3>
+                                    <a class="button button-whatsapp product-dialog-whatsapp" id="product-dialog-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Consultar este producto con Industrias Valeo por WhatsApp">
+                                        Consultar por WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                    <noscript><p class="catalog-fallback">Activa JavaScript para explorar el catálogo interactivo o consulta el catálogo completo en PDF.</p></noscript>
+                </section>
+                <div class="product-source-note">
+                    <span aria-hidden="true">i</span>
+                    <p>Fotografías reales del catálogo Valeo. Los nombres de referencia indican compatibilidad; no implican que sean piezas originales de otras marcas.</p>
+                </div>
             </div>
+        </section>
+
+        <section class="catalogs section-space section-anchor" id="catalogos">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide">
+                <div class="catalog-panel reveal">
+                    <div class="aurora-wash aurora-wash-dark" aria-hidden="true"></div>
+                    <div class="catalog-intro">
+                        <span class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Encuentra lo que buscas</span>
+                        <h2>Catálogos<br /><span>a tu alcance.</span></h2>
+                        <p>Explora nuestro catálogo visual en la página o consulta el catálogo oficial completo.</p>
+                        <a class="button button-white" href="/static/catalogos/catalogo-valeo-2026-sin-precios.pdf" target="_blank" rel="noopener noreferrer">Ver catálogo completo <span aria-hidden="true">↗</span></a>
+                    </div>
+                    <div class="catalog-list">
+                        <a class="catalog-item" href="#productos" data-product-category="ventiladores"><span class="catalog-icon" aria-hidden="true">01</span><span><strong>Repuestos para ventiladores</strong><small>Explora esta línea de productos</small></span><span class="catalog-arrow" aria-hidden="true">↗</span></a>
+                        <a class="catalog-item" href="#productos" data-product-category="licuadoras"><span class="catalog-icon" aria-hidden="true">02</span><span><strong>Repuestos para licuadoras</strong><small>Explora esta línea de productos</small></span><span class="catalog-arrow" aria-hidden="true">↗</span></a>
+                        <a class="catalog-item" href="#productos" data-product-category="ollas"><span class="catalog-icon" aria-hidden="true">03</span><span><strong>Repuestos para ollas a presión</strong><small>Explora esta línea de productos</small></span><span class="catalog-arrow" aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="coverage section-space section-anchor" id="cobertura">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide coverage-grid">
+                <div class="coverage-copy reveal">
+                    <span class="eyebrow"><span class="eyebrow-line"></span> Estamos cerca</span>
+                    <h2>Vendemos en<br /><span>todo el país.</span></h2>
+                    <p>Realizamos envíos a todos los departamentos, ciudades y municipios de Colombia. También realizamos envíos internacionales.</p>
+                    <div class="coverage-stats" aria-label="Alcance de cobertura">
+                        <div><strong>32</strong><span>departamentos</span></div>
+                        <div><strong>100%</strong><span>cobertura nacional</span></div>
+                        <div><strong>+</strong><span>envíos internacionales</span></div>
+                    </div>
+                    <div class="coverage-headquarters">
+                        <span aria-hidden="true">⌖</span>
+                        <div><strong>Bogotá D.C.</strong><span>Sede Industrias Valeo S.A.S.</span></div>
+                    </div>
+                    <div class="coverage-promise">
+                        <span class="promise-icon" aria-hidden="true">↗</span>
+                        <div><strong>Ciudades y municipios</strong><span>Las ciudades de referencia son ejemplos; atendemos todos los municipios de cada departamento.</span></div>
+                    </div>
+                    <button class="button button-primary coverage-quote-link" type="button" data-open-quote>Solicitar cotización <span aria-hidden="true">↗</span></button>
+                </div>
+                <div class="coverage-map reveal">
+                    <div class="map-card">
+                        <div class="map-card-heading">
+                            <span class="map-label">COBERTURA NACIONAL</span>
+                            <span class="map-card-status"><span></span> Selecciona un departamento</span>
+                        </div>
+                        <div class="colombia-map-frame">
+                            <object class="colombia-map" data="/static/maps/colombia-departments.svg?v=3" type="image/svg+xml" role="group" aria-label="Mapa interactivo con los departamentos de Colombia y Bogotá D.C. como sede de Industrias Valeo S.A.S.">
+                                Mapa interactivo de los departamentos de Colombia. Selecciona una región para consultar cobertura.
+                            </object>
+                        </div>
+                        <p class="map-source-note">Límites: © OpenStreetMap contributors / geoBoundaries, ODbL 1.0. <a href="/static/maps/SOURCES.md">Fuente y licencia</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>.</p>
+                    </div>
+                </div>
+                <section class="department-detail reveal" data-department-detail aria-live="polite" aria-atomic="true">
+                    <div class="department-detail-empty">
+                        <span class="department-detail-kicker">COBERTURA POR DEPARTAMENTO</span>
+                        <h3>Selecciona un departamento</h3>
+                        <p>Pasa el cursor sobre el mapa o selecciona un departamento para conocer algunas de sus principales ciudades.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="reasons section-space">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide">
+                <div class="section-heading section-heading-centered reveal">
+                    <span class="eyebrow"><span class="eyebrow-line"></span> Nuestro compromiso <span class="eyebrow-line"></span></span>
+                    <h2>¿Por qué elegir<br /><span>Industrias Valeo?</span></h2>
+                </div>
+                <div class="reasons-grid">
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">20+</span><h3>Más de 20 años</h3><p>Experiencia construida desde 2001.</p></article>
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">✓</span><h3>Fabricantes</h3><p>Desarrollamos repuestos genéricos y compatibles.</p></article>
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">↗</span><h3>Atención personalizada</h3><p>Orientación cercana para encontrar la referencia.</p></article>
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">◇</span><h3>Precios competitivos</h3><p>Alternativas funcionales para distintas necesidades.</p></article>
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">CO</span><h3>Envíos nacionales</h3><p>Atención y despachos a todo Colombia.</p></article>
+                    <article class="reason-card reveal"><span class="reason-icon" aria-hidden="true">◎</span><h3>Envíos internacionales</h3><p>Consulta disponibilidad y condiciones para tu destino.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact section-space section-anchor" id="contacto">
+            <div class="aurora-wash" aria-hidden="true"></div>
+            <div class="container-wide">
+                <div class="contact-panel reveal">
+                    <div class="aurora-wash aurora-wash-dark" aria-hidden="true"></div>
+                    <div class="contact-intro">
+                        <span class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Estamos para ayudarte</span>
+                        <h2>Hablemos de<br /><span>lo que necesitas.</span></h2>
+                        <p>Cuéntanos qué repuesto buscas. Nuestro equipo estará encantado de orientarte.</p>
+                        <a class="button button-white" href="https://wa.me/573212533995?text=Hola%2C%20Industrias%20Valeo.%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer" aria-label="Contactar a Industrias Valeo por WhatsApp">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.9 11.9 0 0 0 5.8 1.48h.01C18.66 23.83 24 18.48 24 11.9a11.85 11.85 0 0 0-3.48-8.42ZM12.08 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 0 1-1.52-5.26c0-5.48 4.46-9.94 9.95-9.94a9.88 9.88 0 0 1 7.03 2.91 9.88 9.88 0 0 1 2.91 7.04c0 5.49-4.46 9.95-9.99 9.95Zm5.46-7.45c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.88-.78-1.48-1.75-1.65-2.05-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+                            Escríbenos por WhatsApp
+                        </a>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-detail"><span class="detail-icon" aria-hidden="true">⌖</span><div><span class="overline">DIRECCIÓN</span><p>Calle 37 B Sur # 69-73, Bogotá, Colombia</p></div></div>
+                        <div class="contact-detail"><span class="detail-icon" aria-hidden="true">↗</span><div><span class="overline">TELÉFONO / WHATSAPP</span><p><a href="tel:+573212533995">321 253 3995</a></p></div></div>
+                        <div class="contact-detail"><span class="detail-icon" aria-hidden="true">@</span><div><span class="overline">CORREO</span><p><a href="mailto:indu_valeosas@hotmail.com">indu_valeosas@hotmail.com</a></p></div></div>
+                        <div class="contact-detail"><span class="detail-icon" aria-hidden="true">◷</span><div><span class="overline">HORARIO DE ATENCIÓN</span><p>Lunes a viernes<br />8:00 a. m. – 5:00 p. m.</p></div></div>
+                        <div class="map-link"><span class="map-link-icon" aria-hidden="true">↗</span><span><strong>Encuéntranos en Bogotá</strong><small><a href="https://maps.google.com/?q=Calle+37+B+Sur+69-73,+Bogota,+Colombia" target="_blank" rel="noopener noreferrer">Ver dirección en el mapa</a></small></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="aurora-wash aurora-wash-dark" aria-hidden="true"></div>
+        <div class="container-wide">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a class="brand brand-footer" href="#inicio">
+                        <span class="official-logo official-logo-footer">
+                            <img class="official-logo-image" src="/static/images/logos/logo-valeo-negro.png" alt="Logo oficial negro de Industrias Valeo S.A.S." />
+                        </span>
+                    </a>
+                    <p>Fabricantes de repuestos genéricos y compatibles para ventiladores, licuadoras y ollas a presión.</p>
+                </div>
+                <div class="footer-links"><h3>Enlaces rápidos</h3><a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#productos">Productos</a><button type="button" class="footer-dialog-link" data-open-quote>Solicitar cotización</button><a href="#cobertura">Cobertura</a><a href="#contacto">Contacto</a></div>
+                <div class="footer-links"><h3>Contacto</h3><a href="https://wa.me/573212533995?text=Hola%2C%20Industrias%20Valeo.%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer" aria-label="Contactar a Industrias Valeo por WhatsApp">WhatsApp: 321 253 3995</a><a href="mailto:indu_valeosas@hotmail.com">indu_valeosas@hotmail.com</a><a href="https://maps.google.com/?q=Calle+37+B+Sur+69-73,+Bogota,+Colombia" target="_blank" rel="noopener noreferrer">Bogotá, Colombia</a><a href="https://www.instagram.com/industrias_valeosas/" target="_blank" rel="noopener noreferrer">Instagram @industrias_valeosas</a><a href="https://www.tiktok.com/@industriasvaleosas" target="_blank" rel="noopener noreferrer">TikTok @industriasvaleosas</a></div>
+                <div class="footer-callout"><span class="overline">COBERTURA</span><h3>Envíos a todo Colombia e internacionales.</h3><a class="footer-cta" href="https://wa.me/573212533995?text=Hola%2C%20Industrias%20Valeo.%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20productos." target="_blank" rel="noopener noreferrer" aria-label="Consultar disponibilidad con Industrias Valeo por WhatsApp">Consultar disponibilidad <span aria-hidden="true">↗</span></a></div>
+            </div>
+            <div class="footer-bottom"><span>© <span id="current-year">2026</span> Industrias Valeo S.A.S. Todos los derechos reservados.</span><span class="footer-legal-links"><a href="#politica-privacidad" data-open-privacy>Política de privacidad</a><a href="#tratamiento-datos" data-open-privacy>Tratamiento de datos</a></span><a href="#inicio">Volver arriba ↑</a></div>
         </div>
-    </div>
+    </footer>
+
+    <button class="quote-floating-button" type="button" data-open-quote>Mi cotización <span class="quote-count" data-quote-count>0</span></button>
+
+    <dialog class="quote-dialog" id="quote-dialog" aria-labelledby="quote-dialog-title">
+        <div class="quote-dialog-shell">
+            <form class="quote-dialog-close-form" method="dialog"><button class="product-dialog-close" type="submit" aria-label="Cerrar cotización">×</button></form>
+            <div class="quote-dialog-heading">
+                <span class="overline">ATENCIÓN MAYORISTA</span>
+                <h2 id="quote-dialog-title">Mi cotización</h2>
+                <p>Revisa las referencias y dinos qué cantidades necesitas. No se muestran precios.</p>
+                <span class="quote-dialog-summary" data-quote-summary aria-live="polite"></span>
+            </div>
+            <div class="quote-empty" data-quote-empty>Aún no agregas productos. Explora el catálogo para empezar tu solicitud.</div>
+            <div class="quote-items" data-quote-items></div>
+            <form class="quote-customer-form" id="quote-form">
+                <h3>Datos de contacto</h3>
+                <div class="quote-fields">
+                    <label>Nombre<input name="name" autocomplete="name" maxlength="120" required /></label>
+                    <label>Ciudad<input name="city" autocomplete="address-level2" maxlength="120" required /></label>
+                    <label>Celular / WhatsApp<input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required /></label>
+                </div>
+                <label class="quote-consent"><input name="consent" type="checkbox" required /><span>Autorizo el uso de estos datos para gestionar mi solicitud, según la <button type="button" data-open-privacy>información de tratamiento de datos</button>.</span></label>
+                <p class="quote-submit-note">La solicitud solo se confirmará cuando el servicio de recepción responda correctamente. Tu selección se conserva en este navegador.</p>
+                <p class="quote-form-status" data-quote-status role="status" aria-live="polite"></p>
+                <div class="quote-success" data-quote-success role="status" aria-live="polite" aria-atomic="true" hidden>
+                    <strong><span aria-hidden="true">✓</span> Solicitud recibida correctamente</strong>
+                    <p>Gracias. Hemos recibido tu solicitud de cotización. Nuestro equipo podrá comunicarse contigo para continuar el proceso.</p>
+                    <a class="button button-whatsapp" data-quote-whatsapp href="https://wa.me/573212533995" target="_blank" rel="noopener noreferrer" aria-label="Continuar la cotización con Industrias Valeo por WhatsApp">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.9 11.9 0 0 0 5.8 1.48h.01C18.66 23.83 24 18.48 24 11.9a11.85 11.85 0 0 0-3.48-8.42ZM12.08 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 0 1-1.52-5.26c0-5.48 4.46-9.94 9.95-9.94a9.88 9.88 0 0 1 7.03 2.91 9.88 9.88 0 0 1 2.91 7.04c0 5.49-4.46 9.95-9.99 9.95Zm5.46-7.45c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.88-.78-1.48-1.75-1.65-2.05-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+                        Continuar por WhatsApp
+                    </a>
+                    <small>También puedes cerrar esta ventana. Tu solicitud ya fue recibida.</small>
+                </div>
+                <button class="button button-primary quote-submit-button" type="submit" data-quote-submit>Solicitar cotización</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog class="privacy-dialog" id="privacy-dialog" aria-labelledby="privacy-dialog-title">
+        <div class="quote-dialog-shell">
+            <form class="quote-dialog-close-form" method="dialog"><button class="product-dialog-close" type="submit" aria-label="Cerrar información">×</button></form>
+            <span class="overline">INFORMACIÓN PARA CLIENTES</span>
+            <h2 id="privacy-dialog-title">Tratamiento de datos personales</h2>
+            <p>Los datos de nombre, ciudad y celular que ingreses en una solicitud se utilizarán para atender y dar seguimiento a esa cotización. Solo se enviarán cuando el servicio de recepción esté conectado y la solicitud sea aceptada.</p>
+            <p>Para consultas sobre tus datos, contacta a Industrias Valeo S.A.S. en <a href="mailto:indu_valeosas@hotmail.com">indu_valeosas@hotmail.com</a>.</p>
+            <p class="privacy-legal-note">Esta información base debe ser revisada y completada por la empresa con sus procedimientos, plazos y canales para ejercer derechos antes de habilitar la recepción productiva de datos.</p>
+        </div>
+    </dialog>
+
+    <a class="floating-whatsapp" href="https://wa.me/573212533995?text=Hola%2C%20Industrias%20Valeo.%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20repuestos%20para%20ventiladores%2C%20licuadoras%20y%20ollas%20a%20presi%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="Contactar a Industrias Valeo por WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.9 11.9 0 0 0 5.8 1.48h.01C18.66 23.83 24 18.48 24 11.9a11.85 11.85 0 0 0-3.48-8.42ZM12.08 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 0 1-1.52-5.26c0-5.48 4.46-9.94 9.95-9.94a9.88 9.88 0 0 1 7.03 2.91 9.88 9.88 0 0 1 2.91 7.04c0 5.49-4.46 9.95-9.99 9.95Zm5.46-7.45c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.88-.78-1.48-1.75-1.65-2.05-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+        <span>WhatsApp</span>
+    </a>
 </body>
 </html>

@@ -1,149 +1,71 @@
+# Industrias Valeo S.A.S.
 
+Sitio web corporativo de Industrias Valeo S.A.S., empresa dedicada a la comercialización de repuestos para ventiladores, licuadoras y ollas a presión.
 
-# Descripción del Proyecto
+La página está construida con FastAPI, plantillas HTML, CSS y JavaScript. No necesita base de datos, `DATABASE_URL`, Supabase ni credenciales para iniciar.
 
-Este proyecto es un Sistema Web de Gestión de Inventario para la empresa **Industrias Valeo S.A.S.**, desarrollado con FastAPI, SQLModel, HTML, CSS y JavaScript.
-El sistema permite administrar el inventario real de la empresa, incluyendo categorías, productos, clientes y control de ventas.
+## Ejecución local
 
-El sistema está desplegado en una URL pública, accesible desde cualquier dispositivo, y la información se gestiona mediante formularios web fáciles de usar.
-
-# Tecnologías Utilizadas
-
-| Tecnología   | Uso                                      |
-| ------------ | ---------------------------------------- |
-| FastAPI      | Backend y funcionamiento de las APIs      |
-| SQLModel     | Modelo y manipulación de datos            |
-| HTML + CSS + Bootstrap | Interfaz gráfica moderna y responsiva |
-| JavaScript   | Interacción dinámica con la API           |
-| Render       | Despliegue de la aplicación en la nube    |
-| Supabase     | Almacenamiento de imágenes                |
-
-## Objetivo del Proyecto
-
-Optimizar el control de inventarios de la empresa Industrias Valeo S.A.S., ofreciendo una herramienta centralizada para administrar productos, clientes y ventas, mejorando el proceso operativo y la toma de decisiones mediante reportes visuales.
-
-
-## Instalación
-1. Clona el repositorio:
-   ```
-   git clone <url-del-repositorio>
-   cd tiendaoficial
-   ```
-
+1. (Opcional) Crea y activa un entorno virtual.
 2. Instala las dependencias:
-   ```
-   pip install fastapi sqlmodel uvicorn
+
+   ```bash
+   pip install -r requirements.txt
    ```
 
-3. Ejecuta la aplicación:
-   ```
+3. Inicia el servidor:
+
+   ```bash
    uvicorn main:app --reload
    ```
 
-La API estará disponible en `http://127.0.0.1:8000`.
+4. Abre <http://127.0.0.1:8000>.
 
-## Uso
-Una vez ejecutada, puedes acceder a la documentación interactiva de la API en `http://127.0.0.1:8000/docs` (Swagger UI) o `http://127.0.0.1:8000/redoc` (ReDoc).
+## Solicitudes de cotización
 
-### Endpoints Principales
-#### Categorías
-- `POST /categorias/`: Crear una nueva categoría.
-- `GET /categorias/`: Obtener todas las categorías activas.
-- `GET /categorias/{id}`: Obtener una categoría por ID.
-- `GET /categorias/{id}/productos`: Obtener una categoría con sus productos.
-- `PUT /categorias/{id}`: Actualizar una categoría.
-- `PATCH /categorias/{id}/desactivar`: Desactivar una categoría.
-- `DELETE /categorias/{id}`: Eliminar una categoría.
+La selección se conserva en el navegador. Para recibir cotizaciones, configura `VALEO_QUOTE_SERVICE_URL` con la URL HTTPS de un servicio externo que acepte `POST` con los datos de contacto y las referencias solicitadas. Si el proveedor requiere autenticación Bearer, configura también `VALEO_QUOTE_SERVICE_TOKEN` como secreto. No se almacenan solicitudes en una base de datos.
 
-#### Productos
-- `POST /productos/`: Crear un nuevo producto.
-- `GET /productos/`: Obtener todos los productos.
-- `GET /productos/{id}`: Obtener un producto por ID.
-- `GET /productos/{id}/categoria`: Obtener un producto con su categoría.
-- `PUT /productos/{id}`: Actualizar un producto.
-- `PATCH /productos/{id}/desactivar`: Desactivar un producto.
-- `PATCH /productos/{id}/restar-stock`: Restar stock a un producto.
-- `DELETE /productos/{id}`: Eliminar un producto.
+Si `VALEO_QUOTE_SERVICE_URL` no está configurada, el endpoint responde con `503` y la página informa claramente que no se envió ni registró la solicitud. Un error o rechazo del servicio configurado tampoco se presenta como éxito. El servicio externo debe aceptar el contrato JSON enviado por `POST /api/quotes` y devolver un código HTTP 2xx.
 
-## Estructura del Proyecto
-- `models.py`: Definición de los modelos de base de datos (Categoria, Producto).
-- `schemas.py`: Esquemas Pydantic para validación y respuestas.
-- `database.py`: Configuración de la base de datos y inicialización.
-- `crud.py`: Funciones CRUD para operaciones en la base de datos.
-- `main.py`: Punto de entrada de la aplicación FastAPI.
+El cuerpo que recibe el servicio configurado sigue esta estructura (cada producto se resuelve contra el catálogo local antes de reenviarse):
 
-## Modelos y Relaciones
+```json
+{
+  "company": "Industrias Valeo S.A.S.",
+  "customer": { "name": "Nombre", "city": "Ciudad", "phone": "Celular" },
+  "items": [
+    {
+      "productId": "licuadoras-01",
+      "name": "Acople amarillo 6/14",
+      "category": "Licuadoras",
+      "group": "Acoples para la licuadora",
+      "quantity": 2
+    }
+  ],
+  "privacyConsent": true
+}
+```
 
-### Clases de Modelos
-- **Categoria**:
-  - `id`: int (primary key)
-  - `nombre`: str (unique, index)
-  - `descripcion`: Optional[str]
-  - `activa`: bool (default: True)
-  - `deleted_at`: Optional[datetime]
-  - Relación: `productos` (List[Producto]) - back_populates="categoria"
+Las variantes de color indicadas en el catálogo también incluyen `color` cuando el cliente lo selecciona. Se requiere HTTPS porque el envío contiene datos personales.
 
-- **Producto**:
-  - `id`: int (primary key)
-  - `nombre`: str
-  - `descripcion`: Optional[str]
-  - `precio`: float
-  - `stock`: int
-  - `activo`: bool (default: True)
-  - `deleted_at`: Optional[datetime]
-  - `categoria_id`: int (foreign key to Categoria.id)
-  - Relación: `categoria` (Optional[Categoria]) - back_populates="productos"
+## Despliegue en Render
 
-### Relaciones
-- Una **Categoria** puede tener muchos **Producto** (one-to-many).
-- Un **Producto** pertenece a una **Categoria** (many-to-one).
+- **Build command:** `pip install -r requirements.txt`
+- **Start command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+- Configura `VALEO_QUOTE_SERVICE_URL` (y, si aplica, `VALEO_QUOTE_SERVICE_TOKEN`) en el entorno del servicio.
 
-## Endpoints Detallados
+## Estructura
 
-### Categorías
-- `POST /categorias/`: Crear una nueva categoría.
-  - Body: `CategoriaCreate` (nombre, descripcion, activa)
-  - Response: `Categoria`
-- `GET /categorias/`: Obtener todas las categorías activas.
-  - Response: `list[Categoria]`
-- `GET /categorias/{id}`: Obtener una categoría por ID.
-  - Response: `Categoria`
-- `GET /categorias/{id}/productos`: Obtener una categoría con sus productos.
-  - Response: dict con categoría y lista de productos
-- `PUT /categorias/{id}`: Actualizar una categoría.
-  - Body: `CategoriaUpdate`
-  - Response: `Categoria`
-- `PATCH /categorias/{id}/desactivar`: Desactivar una categoría.
-  - Response: `Categoria`
-- `DELETE /categorias/{id}`: Eliminar una categoría (soft delete).
-  - Response: dict con mensaje
-- `GET /categorias/eliminadas`: Obtener categorías eliminadas.
-  - Response: list[dict]
+- `main.py`: aplicación FastAPI sin base de datos, ruta principal, montaje de archivos estáticos y recepción/validación de solicitudes de cotización para un servicio externo configurado.
+- `templates/index.html`: página corporativa y sus secciones.
+- `static/css/style.css`: estilos responsive, animaciones e interfaz de cotización.
+- `static/js/site.js`: menú móvil, catálogo, filtros, selección local de cotización, envío al servicio externo y año del footer.
+- `static/maps/colombia-departments.svg`: mapa interactivo de 32 departamentos y Bogotá D.C.; datos geográficos con atribución/licencia en `static/maps/SOURCES.md`.
+- `static/data/coverage-departments.json`: nombres oficiales de presentación y ciudades principales de referencia para el panel interactivo de cobertura.
+- `static/images/logos/logo-valeo-horizontal.png`: logo oficial horizontal azul y negro, usado en el header y la portada.
+- `static/images/logos/logo-valeo-principal.png`: variante oficial principal, archivada para usos futuros.
+- `static/images/logos/logo-valeo-negro.png`: variante oficial negra, usada en el footer sobre fondo blanco.
 
-### Productos
-- `POST /productos/`: Crear un nuevo producto.
-  - Body: `ProductoCreate` (nombre, descripcion, precio, stock, activo, categoria_id)
-  - Response: `Producto`
-- `GET /productos/`: Obtener todos los productos.
-  - Response: `list[ProductoListResponse]`
-- `GET /productos/{id}`: Obtener un producto por ID.
-  - Response: `Producto`
-- `GET /productos/{id}/categoria`: Obtener un producto con su categoría.
-  - Response: `ProductoResponse`
-- `PUT /productos/{id}`: Actualizar un producto.
-  - Body: `ProductoUpdate`
-  - Response: `Producto`
-- `PATCH /productos/{id}/desactivar`: Desactivar un producto.
-  - Response: `Producto`
-- `PATCH /productos/{id}/restar-stock`: Restar stock a un producto.
-  - Body: `RestarStock` (cantidad)
-  - Response: `Producto`
-- `DELETE /productos/{id}`: Eliminar un producto (soft delete).
-  - Response: dict con mensaje
-- `GET /productos/eliminados`: Obtener productos eliminados.
-  - Response: list[dict]
+Los archivos `crud.py`, `database.py`, `models.py`, `schemas.py`, `supabase_utils.py` y `valeo_db.sql` se conservan como respaldo del sistema anterior. La aplicación web actual no los importa ni los utiliza.
 
-## Autor
-- **Nombre**: Omar David Valderrama Gutierrez
-- **Código**: 67000516
-
+La información de tratamiento de datos de la página es una base informativa que la empresa debe revisar y completar con sus procedimientos, plazos y canales antes de habilitar el servicio externo en producción.

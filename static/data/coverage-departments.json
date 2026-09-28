@@ -1,0 +1,43 @@
+{
+  "source": {
+    "name": "geoBoundaries Colombia ADM1 (simplified)",
+    "url": "https://www.geoboundaries.org/api/current/gbOpen/COL/ADM1/",
+    "license": "Open Data Commons Open Database License (ODbL) 1.0",
+    "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/"
+  },
+  "departments": [
+    { "id": "amazonas", "name": "Amazonas", "cities": ["Leticia", "Puerto Nariño"] },
+    { "id": "antioquia", "name": "Antioquia", "cities": ["Medellín", "Bello", "Itagüí", "Envigado", "Rionegro", "Apartadó"] },
+    { "id": "arauca", "name": "Arauca", "cities": ["Arauca", "Saravena", "Tame"] },
+    { "id": "atlantico", "name": "Atlántico", "cities": ["Barranquilla", "Soledad", "Malambo", "Puerto Colombia"] },
+    { "id": "bogota-dc", "name": "Bogotá D.C.", "isCapital": true, "cities": ["Bogotá"] },
+    { "id": "bolivar", "name": "Bolívar", "cities": ["Cartagena", "Magangué", "Turbaco", "El Carmen de Bolívar"] },
+    { "id": "boyaca", "name": "Boyacá", "cities": ["Tunja", "Duitama", "Sogamoso", "Chiquinquirá"] },
+    { "id": "caldas", "name": "Caldas", "cities": ["Manizales", "La Dorada", "Chinchiná"] },
+    { "id": "caqueta", "name": "Caquetá", "cities": ["Florencia", "San Vicente del Caguán"] },
+    { "id": "casanare", "name": "Casanare", "cities": ["Yopal", "Aguazul", "Villanueva"] },
+    { "id": "cauca", "name": "Cauca", "cities": ["Popayán", "Santander de Quilichao", "Puerto Tejada"] },
+    { "id": "cesar", "name": "Cesar", "cities": ["Valledupar", "Aguachica", "Codazzi"] },
+    { "id": "choco", "name": "Chocó", "cities": ["Quibdó", "Istmina"] },
+    { "id": "cordoba", "name": "Córdoba", "cities": ["Montería", "Cereté", "Lorica", "Sahagún"] },
+    { "id": "cundinamarca", "name": "Cundinamarca", "cities": ["Soacha", "Fusagasugá", "Facatativá", "Chía", "Zipaquirá", "Girardot"] },
+    { "id": "guainia", "name": "Guainía", "cities": ["Inírida"] },
+    { "id": "guaviare", "name": "Guaviare", "cities": ["San José del Guaviare"] },
+    { "id": "huila", "name": "Huila", "cities": ["Neiva", "Pitalito", "Garzón", "La Plata"] },
+    { "id": "la-guajira", "name": "La Guajira", "cities": ["Riohacha", "Maicao", "Uribia"] },
+    { "id": "magdalena", "name": "Magdalena", "cities": ["Santa Marta", "Ciénaga", "Fundación"] },
+    { "id": "meta", "name": "Meta", "cities": ["Villavicencio", "Acacías", "Granada"] },
+    { "id": "narino", "name": "Nariño", "cities": ["Pasto", "Ipiales", "Tumaco"] },
+    { "id": "norte-de-santander", "name": "Norte de Santander", "cities": ["Cúcuta", "Ocaña", "Villa del Rosario", "Los Patios"] },
+    { "id": "putumayo", "name": "Putumayo", "cities": ["Mocoa", "Puerto Asís", "Orito"] },
+    { "id": "quindio", "name": "Quindío", "cities": ["Armenia", "Calarcá", "Montenegro"] },
+    { "id": "risaralda", "name": "Risaralda", "cities": ["Pereira", "Dosquebradas", "Santa Rosa de Cabal"] },
+    { "id": "san-andres-providencia-y-santa-catalina", "name": "San Andrés, Providencia y Santa Catalina", "cities": ["San Andrés", "Providencia"] },
+    { "id": "santander", "name": "Santander", "cities": ["Bucaramanga", "Floridablanca", "Girón", "Piedecuesta", "Barrancabermeja"] },
+    { "id": "sucre", "name": "Sucre", "cities": ["Sincelejo", "Corozal", "Tolú"] },
+    { "id": "tolima", "name": "Tolima", "cities": ["Ibagué", "Espinal", "Melgar", "Honda"] },
+    { "id": "valle-del-cauca", "name": "Valle del Cauca", "cities": ["Cali", "Palmira", "Buenaventura", "Tuluá", "Buga", "Cartago"] },
+    { "id": "vaupes", "name": "Vaupés", "cities": ["Mitú"] },
+    { "id": "vichada", "name": "Vichada", "cities": ["Puerto Carreño"] }
+  ]
+}
