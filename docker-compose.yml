@@ -6,11 +6,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      VALEO_QUOTE_SERVICE_URL: ${VALEO_QUOTE_SERVICE_URL:-}
-      VALEO_QUOTE_SERVICE_TOKEN: ${VALEO_QUOTE_SERVICE_TOKEN:-}
+      COTIZACIONES_ADMIN_TOKEN: ${COTIZACIONES_ADMIN_TOKEN:-}
     restart: unless-stopped
     init: true
     read_only: true
+    volumes:
+      - cotizaciones_data:/app/data
     tmpfs:
       - /tmp
     security_opt:
@@ -27,3 +28,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
+
+volumes:
+  cotizaciones_data:

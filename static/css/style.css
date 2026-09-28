@@ -4628,6 +4628,44 @@ main {
     display: none;
 }
 
+.quote-error {
+    display: grid;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid #f0d3c8;
+    border-radius: 12px;
+    background: #fff8f5;
+    color: #7d4032;
+}
+
+.quote-error[hidden] {
+    display: none;
+}
+
+.quote-error p,
+.quote-success-number {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.quote-error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.quote-error-actions .button {
+    min-height: 40px;
+    padding-inline: 13px;
+    font-size: 11px;
+}
+
+.quote-success-number {
+    color: #246d49;
+    font-weight: 750;
+}
+
 .quote-success strong {
     display: flex;
     align-items: center;

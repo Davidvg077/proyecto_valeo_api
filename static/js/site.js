@@ -275,6 +275,7 @@ const quoteItemsContainer = document.querySelector("[data-quote-items]");
 const quoteEmpty = document.querySelector("[data-quote-empty]");
 const quoteStatus = document.querySelector("[data-quote-status]");
 const quoteSuccess = document.querySelector("[data-quote-success]");
+const quoteError = document.querySelector("[data-quote-error]");
 const quoteSubmitButton = quoteForm?.querySelector(".quote-submit-button");
 const quoteSubmitNote = quoteForm?.querySelector(".quote-submit-note");
 const quoteCustomerFields = quoteForm?.querySelector(".quote-fields");
@@ -415,9 +416,15 @@ const updateQuoteCount = () => {
     }
 };
 
-const buildQuoteWhatsappMessage = (lines, customer = null) => {
+const buildQuoteWhatsappMessage = (lines, customer = null, quoteId = null) => {
     if (!Array.isArray(lines) || lines.length === 0) return "";
-    const messageLines = ["Hola, Industrias Valeo. Quiero continuar con mi solicitud de cotización."];
+    const validQuoteId = Number.isSafeInteger(Number(quoteId)) && Number(quoteId) > 0
+        ? String(Number(quoteId))
+        : "";
+    const messageLines = [
+        "Hola, Industrias Valeo.",
+        `Quiero continuar con mi solicitud de cotización${validQuoteId ? ` #${validQuoteId}` : ""}.`
+    ];
     if (customer) {
         const name = cleanWhatsappValue(customer.name);
         const city = cleanWhatsappValue(customer.city);
@@ -773,60 +780,95 @@ quoteForm?.addEventListener("submit", async (event) => {
         if (quoteStatus) quoteStatus.textContent = "Completa nombre, ciudad, celular y al menos un producto con cantidades válidas.";
         return;
     }
-    const items = quoteItems.flatMap((line) => {
+    const products = quoteItems.flatMap((line) => {
         const product = quoteProducts.find((item) => item.id === line.productId);
+        if (!product) return [];
         if (productHasColorVariants(product)) {
-            return line.variants.map((variant) => ({
-                productId: line.productId,
-                color: variant.color,
-                quantity: variant.quantity
-            }));
+            return [{
+                nombre: cleanWhatsappValue(product.name),
+                referencia: cleanWhatsappValue(product.id),
+                variantes: line.variants.map((variant) => ({
+                    color: cleanWhatsappValue(variant.color),
+                    cantidad: variant.quantity
+                }))
+            }];
         }
         return [{
-            productId: line.productId,
-            quantity: line.quantity
+            nombre: cleanWhatsappValue(product.name),
+            referencia: cleanWhatsappValue(product.id),
+            cantidad: line.quantity
         }];
     });
-    const whatsappMessage = buildQuoteWhatsappMessage(getWhatsappQuoteLines(), customer);
-    if (!whatsappMessage) {
+    const whatsappLines = getWhatsappQuoteLines();
+    const whatsappMessage = buildQuoteWhatsappMessage(whatsappLines, customer);
+    if (!products.length || !whatsappMessage) {
         if (quoteStatus) quoteStatus.textContent = "No se pudo preparar un resumen válido de la cotización. Revisa los productos y sus cantidades.";
         return;
     }
 
     quoteRequestPending = true;
+    if (quoteError) quoteError.hidden = true;
     if (quoteStatus) quoteStatus.textContent = "Enviando la solicitud de forma segura…";
     renderQuoteItems();
     try {
-        const response = await fetch("/api/quotes", {
+        const response = await fetch("/api/cotizaciones", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...customer, items, privacyConsent: true })
+            body: JSON.stringify({
+                nombre: customer.name,
+                ciudad: customer.city,
+                celular: customer.phone,
+                productos
+            })
         });
-        const result = await response.json();
-        if (!response.ok) {
-            const message = typeof result.detail === "string"
-                ? result.detail
-                : "No se pudo confirmar la solicitud. No se ha registrado; intenta de nuevo o contacta por WhatsApp.";
-            throw new Error(message);
+        let result;
+        try {
+            result = await response.json();
+        } catch {
+            throw new Error("El servidor no devolvió una confirmación válida.");
+        }
+        if (
+            response.status !== 201 ||
+            result?.ok !== true ||
+            !Number.isSafeInteger(result.cotizacion_id) ||
+            result.cotizacion_id < 1
+        ) {
+            throw new Error(typeof result?.detail === "string" ? result.detail : "No se confirmó el registro de la cotización.");
         }
 
         const whatsappLink = quoteDialog.querySelector("[data-quote-whatsapp]");
-        whatsappLink.href = createWhatsAppUrl(whatsappMessage);
+        const successWhatsappMessage = buildQuoteWhatsappMessage(
+            whatsappLines,
+            customer,
+            result.cotizacion_id
+        );
+        whatsappLink.href = createWhatsAppUrl(successWhatsappMessage);
+        quoteSuccess.querySelector("[data-quote-number]").textContent = `Número de solicitud: #${result.cotizacion_id}`;
         quoteRequestAccepted = true;
         if (quoteSubmitNote) quoteSubmitNote.hidden = true;
         if (quoteCustomerFields) quoteCustomerFields.hidden = true;
         if (quoteConsent) quoteConsent.hidden = true;
         quoteSuccess.hidden = false;
+        if (quoteError) quoteError.hidden = true;
         if (quoteStatus) quoteStatus.textContent = "";
         renderQuoteItems();
     } catch (error) {
         console.error("No fue posible enviar la solicitud de cotización.", error);
-        if (quoteStatus) {
-            quoteStatus.textContent = `${error.message} También puedes contactarnos directamente por WhatsApp al 321 253 3995.`;
-        }
+        quoteError.querySelector("[data-quote-error-message]").textContent =
+            "No pudimos registrar tu solicitud en este momento. Tu selección sigue guardada. Puedes intentarlo nuevamente o continuar por WhatsApp.";
+        quoteError.querySelector("[data-quote-error-whatsapp]").href =
+            createWhatsAppUrl(buildQuoteWhatsappMessage(whatsappLines, customer));
+        quoteError.hidden = false;
+        if (quoteStatus) quoteStatus.textContent = "";
     } finally {
         quoteRequestPending = false;
         updateQuoteSubmitButton();
+    }
+});
+
+quoteForm?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-quote-retry]")) {
+        quoteForm.requestSubmit();
     }
 });
 

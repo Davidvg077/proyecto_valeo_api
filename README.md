@@ -2,7 +2,7 @@
 
 Sitio web corporativo de Industrias Valeo S.A.S., empresa dedicada a la comercialización de repuestos para ventiladores, licuadoras y ollas a presión.
 
-La página está construida con FastAPI, plantillas HTML, CSS y JavaScript. No necesita base de datos, `DATABASE_URL`, Supabase ni credenciales para iniciar.
+La página está construida con FastAPI, plantillas HTML, CSS y JavaScript. No usa `DATABASE_URL`, Supabase ni PostgreSQL. Las solicitudes de cotización se guardan localmente en SQLite.
 
 ## Ejecución local
 
@@ -32,49 +32,63 @@ docker compose up --build -d
 
 La aplicación escucha en `0.0.0.0:8000` dentro del contenedor y publica el puerto `8000` del VPS. Consulta el estado y los registros con `docker compose ps` y `docker compose logs -f`; para detenerla usa `docker compose down`.
 
-El servicio corre como usuario sin privilegios, con sistema de archivos de solo lectura y reinicio automático (`unless-stopped`). No requiere base de datos. Si se conecta un servicio externo para recibir cotizaciones, define `VALEO_QUOTE_SERVICE_URL` y, opcionalmente, `VALEO_QUOTE_SERVICE_TOKEN` en el entorno protegido del VPS antes de iniciar Compose. No agregues credenciales ni archivos `.env` al repositorio o a la imagen.
+El servicio corre como usuario sin privilegios, con sistema de archivos de solo lectura y reinicio automático (`unless-stopped`). La base de datos se guarda en el volumen Docker `cotizaciones_data`, montado en `/app/data`; no elimines este volumen al actualizar o detener el servicio (`docker compose down -v` sí lo elimina). Configura `COTIZACIONES_ADMIN_TOKEN` con un secreto aleatorio de al menos 32 caracteres en el entorno protegido del VPS para habilitar el endpoint administrativo de consulta. Sin ese token, el endpoint de consulta permanece deshabilitado. No agregues credenciales ni archivos `.env` al repositorio o a la imagen.
 
 ## Solicitudes de cotización
 
-La selección se conserva en el navegador. Para recibir cotizaciones, configura `VALEO_QUOTE_SERVICE_URL` con la URL HTTPS de un servicio externo que acepte `POST` con los datos de contacto y las referencias solicitadas. Si el proveedor requiere autenticación Bearer, configura también `VALEO_QUOTE_SERVICE_TOKEN` como secreto. No se almacenan solicitudes en una base de datos.
+El frontend envía las solicitudes a `POST /api/cotizaciones`. FastAPI valida nombre, ciudad, celular, productos, cantidades y variantes con Pydantic y guarda cada solicitud en `data/cotizaciones.db` con estado inicial `pendiente`. La API responde HTTP 201 solo después de guardar la cotización; ante errores de SQLite devuelve HTTP 500. La selección del navegador se conserva si ocurre un error.
 
-Si `VALEO_QUOTE_SERVICE_URL` no está configurada, el endpoint responde con `503` y la página informa claramente que no se envió ni registró la solicitud. Un error o rechazo del servicio configurado tampoco se presenta como éxito. El servicio externo debe aceptar el contrato JSON enviado por `POST /api/quotes` y devolver un código HTTP 2xx.
+Para consultar las solicitudes más recientes durante administración o pruebas, usa `GET /api/cotizaciones` con el token configurado:
 
-El cuerpo que recibe el servicio configurado sigue esta estructura (cada producto se resuelve contra el catálogo local antes de reenviarse):
+```bash
+curl -H "Authorization: Bearer $COTIZACIONES_ADMIN_TOKEN" \
+  "https://tu-dominio.example/api/cotizaciones?limit=20"
+```
+
+El endpoint devuelve datos personales; queda deshabilitado (HTTP 404) si el token no está configurado, y requiere autenticación Bearer cuando sí lo está. Protege el token y limita el acceso administrativo a conexiones HTTPS.
+
+El cuerpo de `POST /api/cotizaciones` usa esta estructura:
 
 ```json
 {
-  "company": "Industrias Valeo S.A.S.",
-  "customer": { "name": "Nombre", "city": "Ciudad", "phone": "Celular" },
-  "items": [
+  "nombre": "Nombre",
+  "ciudad": "Ciudad",
+  "celular": "Celular",
+  "productos": [
     {
-      "productId": "licuadoras-01",
-      "name": "Acople amarillo 6/14",
-      "category": "Licuadoras",
-      "group": "Acoples para la licuadora",
-      "quantity": 2
+      "nombre": "Aspa Picoloro 18",
+      "referencia": "ventiladores-03",
+      "variantes": [
+        { "color": "Azul", "cantidad": 24 },
+        { "color": "Rojo", "cantidad": 12 }
+      ]
+    },
+    {
+      "nombre": "Frentera Turbo blanca",
+      "referencia": "ventiladores-11",
+      "cantidad": 50
     }
-  ],
-  "privacyConsent": true
+  ]
 }
 ```
 
-Las variantes de color indicadas en el catálogo también incluyen `color` cuando el cliente lo selecciona. Se requiere HTTPS porque el envío contiene datos personales.
+La respuesta exitosa tiene `ok`, `mensaje` y `cotizacion_id`. El enlace opcional de WhatsApp se prepara con el identificador asignado por SQLite.
 
-## Despliegue en Render
+## Despliegue en otros servicios
 
 - **Build command:** `pip install -r requirements.txt`
 - **Start command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Configura `VALEO_QUOTE_SERVICE_URL` (y, si aplica, `VALEO_QUOTE_SERVICE_TOKEN`) en el entorno del servicio.
+- Configura `VALEO_COTIZACIONES_DB` para que apunte a un disco persistente montado por el proveedor. Sin disco persistente, las cotizaciones pueden perderse al reiniciar o reemplazar la instancia.
+- Configura `COTIZACIONES_ADMIN_TOKEN` con un secreto aleatorio de al menos 32 caracteres solo si necesitas habilitar la consulta administrativa.
 
 ## Estructura
 
-- `main.py`: aplicación FastAPI sin base de datos, ruta principal, montaje de archivos estáticos y recepción/validación de solicitudes de cotización para un servicio externo configurado.
+- `main.py`: aplicación FastAPI, montaje de archivos estáticos, validación de cotizaciones, persistencia SQLite y consulta administrativa protegida.
 - `Dockerfile` y `docker-compose.yml`: imagen y servicio de producción para el despliegue en VPS.
 - `.dockerignore`: excluye entornos locales, archivos de configuración sensible, credenciales y bases locales del contexto de build.
 - `templates/index.html`: página corporativa y sus secciones.
 - `static/css/style.css`: estilos responsive, animaciones e interfaz de cotización.
-- `static/js/site.js`: menú móvil, catálogo, filtros, selección local de cotización, envío al servicio externo y año del footer.
+- `static/js/site.js`: menú móvil, catálogo, filtros, selección local de cotización, envío a FastAPI/SQLite y año del footer.
 - `static/maps/colombia-departments.svg`: mapa interactivo de 32 departamentos y Bogotá D.C.; datos geográficos con atribución/licencia en `static/maps/SOURCES.md`.
 - `static/data/coverage-departments.json`: nombres oficiales de presentación y ciudades principales de referencia para el panel interactivo de cobertura.
 - `static/images/logos/logo-valeo-horizontal.png`: logo oficial horizontal azul y negro, usado en el header y la portada.
@@ -83,4 +97,4 @@ Las variantes de color indicadas en el catálogo también incluyen `color` cuand
 
 Los archivos `crud.py`, `database.py`, `models.py`, `schemas.py`, `supabase_utils.py` y `valeo_db.sql` se conservan como respaldo del sistema anterior. La aplicación web actual no los importa ni los utiliza.
 
-La información de tratamiento de datos de la página es una base informativa que la empresa debe revisar y completar con sus procedimientos, plazos y canales antes de habilitar el servicio externo en producción.
+La información de tratamiento de datos de la página debe ser revisada y completada por la empresa con sus procedimientos, plazos de conservación y canales para ejercer derechos.
