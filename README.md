@@ -21,6 +21,19 @@ La página está construida con FastAPI, plantillas HTML, CSS y JavaScript. No n
 
 4. Abre <http://127.0.0.1:8000>.
 
+## Despliegue en Hostinger VPS con Docker
+
+Se requiere Docker Engine y el plugin Docker Compose en el VPS. Desde la raíz del repositorio, valida y levanta el sitio con:
+
+```bash
+docker compose config
+docker compose up --build -d
+```
+
+La aplicación escucha en `0.0.0.0:8000` dentro del contenedor y publica el puerto `8000` del VPS. Consulta el estado y los registros con `docker compose ps` y `docker compose logs -f`; para detenerla usa `docker compose down`.
+
+El servicio corre como usuario sin privilegios, con sistema de archivos de solo lectura y reinicio automático (`unless-stopped`). No requiere base de datos. Si se conecta un servicio externo para recibir cotizaciones, define `VALEO_QUOTE_SERVICE_URL` y, opcionalmente, `VALEO_QUOTE_SERVICE_TOKEN` en el entorno protegido del VPS antes de iniciar Compose. No agregues credenciales ni archivos `.env` al repositorio o a la imagen.
+
 ## Solicitudes de cotización
 
 La selección se conserva en el navegador. Para recibir cotizaciones, configura `VALEO_QUOTE_SERVICE_URL` con la URL HTTPS de un servicio externo que acepte `POST` con los datos de contacto y las referencias solicitadas. Si el proveedor requiere autenticación Bearer, configura también `VALEO_QUOTE_SERVICE_TOKEN` como secreto. No se almacenan solicitudes en una base de datos.
@@ -57,6 +70,8 @@ Las variantes de color indicadas en el catálogo también incluyen `color` cuand
 ## Estructura
 
 - `main.py`: aplicación FastAPI sin base de datos, ruta principal, montaje de archivos estáticos y recepción/validación de solicitudes de cotización para un servicio externo configurado.
+- `Dockerfile` y `docker-compose.yml`: imagen y servicio de producción para el despliegue en VPS.
+- `.dockerignore`: excluye entornos locales, archivos de configuración sensible, credenciales y bases locales del contexto de build.
 - `templates/index.html`: página corporativa y sus secciones.
 - `static/css/style.css`: estilos responsive, animaciones e interfaz de cotización.
 - `static/js/site.js`: menú móvil, catálogo, filtros, selección local de cotización, envío al servicio externo y año del footer.
