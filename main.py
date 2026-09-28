@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -180,6 +181,16 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 @app.get("/")
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/robots.txt", include_in_schema=False)
+async def robots_txt():
+    return FileResponse(BASE_DIR / "robots.txt", media_type="text/plain")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def sitemap_xml():
+    return FileResponse(BASE_DIR / "sitemap.xml", media_type="application/xml")
 
 
 @app.post("/api/cotizaciones", status_code=201)
